@@ -36,7 +36,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
-Prereq:		%{_sbindir}/apxs
+Requires(post,preun):	%{apxs}
 Requires:	apache >= 2.0.44
 %pyrequires_eq	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
