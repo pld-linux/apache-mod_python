@@ -1,6 +1,7 @@
 %include	/usr/lib/rpm/macros.python
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
+%define		beta	BETA4
 Summary:	An embedded Python interpreter for the Apache Web server
 Summary(cs):	Vestavìný interpret Pythonu pro WWW server Apache
 Summary(da):	En indbygget Python-fortolker for webtjeneren Apache
@@ -19,17 +20,18 @@ Summary(sk):	Interpreter jazyka Perl pre webový server Apache
 Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	2.7.8
-Release:	5
+Version:	3.0.0
+Release:	0.1
 License:	distributable
 Group:		Networking/Daemons
-Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
+Source0: http://www.apache.org/dist/httpd/modpython/dev/mod_%{mod_name}-%{version}-%{beta}.tgz
 #Patch0:		%{name}-shared.patch
-Patch1:		%{name}-DESTDIR.patch
-Patch2:		%{name}-Makefile-in.patch
-Patch3:		%{name}-cleanup.patch
+##Patch1:		%{name}-DESTDIR.patch
+#Patch2:		%{name}-Makefile-in.patch
+#Patch3:		%{name}-cleanup.patch
 # PLD keeps static libs in /usr/lib default python install stores them in .../config/
-Patch4: 	%{name}-static-lib-dir-fix.patch
+Patch1: 	%{name}-3-static-lib-dir-fix.patch
+Patch2:		%{name}-3-DESTDIR.patch
 
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
@@ -122,18 +124,19 @@ webbservern Apache till en avsevärd ökning av flexibiliteten och
 prestandan jämfört med den traditionella CGI-metoden.
 
 %prep
-%setup -q -n mod_%{mod_name}-%{version}
+%setup -q -n mod_%{mod_name}-%{version}-%{beta}
 # Patch reverted. Dynamic build makes apache segfault on all my i686 machines
 # No working reports collected on IRC/mailing lists.
 #%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+%patch1 -p0
+%patch2 -p0
+#%patch3 -p1
+#%patch4 -p1
 
 %build
 %{__aclocal}
 %{__autoconf}
+
 
 # new apache needs it
 CFLAGS="-DEAPI %{rpmcflags}"
