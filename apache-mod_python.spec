@@ -19,7 +19,7 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.1.3
-Release:	5
+Release:	6
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
@@ -27,6 +27,7 @@ Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.t
 Source1:	%{name}.conf
 Patch0:		%{name}-lib64.patch
 Patch1:		%{name}-apr-status-is-success.patch
+Patch2:		%{name}-httpd-not-needed.patch
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
 #BuildRequires:	apache >= 2.0.44
@@ -35,6 +36,7 @@ BuildRequires:	apr-devel >= 1:1.0.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex >= 2.5.31
+BuildRequires:	python
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
 Requires(post,preun):	%{apxs}
@@ -129,6 +131,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 %patch0
 %endif
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__aclocal}
