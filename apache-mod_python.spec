@@ -1,9 +1,4 @@
 
-#
-# todo:
-# - configuration file in /etc/httpd/httpd.conf/ _directory_
-#
-
 %include	/usr/lib/rpm/macros.python
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
@@ -26,10 +21,11 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.0.1
-Release:	0.2
+Release:	0.3
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
+Source1:	%{name}.conf
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-no-compile.patch
 URL:		http://www.modpython.org/
@@ -40,7 +36,7 @@ BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
 BuildRequires:	%{apxs}
 Prereq:		%{_sbindir}/apxs
-Requires:	apache
+Requires:	apache >= 2.0.44
 %pyrequires_eq	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -139,9 +135,12 @@ CFLAGS="-DEAPI %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}}
+install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}} \
+	$RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
@@ -165,6 +164,7 @@ fi
 %defattr(644,root,root,755)
 %doc doc-html/*
 %doc README COPYRIGHT NEWS CREDITS
+%{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
 %attr(755,root,root) %{apache_moddir}/*
 %dir %{py_sitedir}/mod_%{mod_name}
 %{py_sitedir}/mod_%{mod_name}/*.py[co]
