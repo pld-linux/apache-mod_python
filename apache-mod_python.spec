@@ -19,13 +19,13 @@ Summary(sk):	Interpreter jazyka Perl pre webový server Apache
 Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	2.7.9
+Version:	2.7.10
 Release:	1
 License:	distributable
 Group:		Networking/Daemons
 #Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
-# Source0-md5:	fc8c83b310d22a75491de3c2647a0f71
+# Source0-md5:	12c98bdefa06735679efc878b81e9bb2
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-Makefile-in.patch
