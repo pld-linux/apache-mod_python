@@ -20,12 +20,12 @@ Summary(sk):	Interpreter jazyka Perl pre webový server Apache
 Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	3.0.1
+Version:	3.0.3
 Release:	1
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
-# Source0-md5:	41e587e2347449d60ed4ea02ffbc8a14
+# Source0-md5:	39f8db0bafac6ce241599d2299b5d853
 Source1:	%{name}.conf
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-no-compile.patch
@@ -140,6 +140,7 @@ install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install_py_lib DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
 
