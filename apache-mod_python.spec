@@ -1,3 +1,9 @@
+
+#
+# todo:
+# - configuration file in /etc/httpd/httpd.conf/ _directory_
+#
+
 %include	/usr/lib/rpm/macros.python
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
@@ -19,14 +25,14 @@ Summary(sk):	Interpreter jazyka Perl pre webový server Apache
 Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	2.7.8
-Release:	5
-License:	distributable
+Version:	3.0.1
+Release:	0.2
+License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
 #Patch0:		%{name}-shared.patch
 Patch1:		%{name}-DESTDIR.patch
-Patch2:		%{name}-Makefile-in.patch
+Patch2:		%{name}-no-compile.patch
 Patch3:		%{name}-cleanup.patch
 # PLD keeps static libs in /usr/lib default python install stores them in .../config/
 Patch4:		%{name}-static-lib-dir-fix.patch
@@ -34,9 +40,8 @@ Patch4:		%{name}-static-lib-dir-fix.patch
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	apache-devel
+BuildRequires:	apache-devel >= 2.0.44
 BuildRequires:	python-devel >= 2.2
-BuildRequires:	python-static >= 2.2
 BuildRequires:	rpm-pythonprov
 BuildRequires:	%{apxs}
 Prereq:		%{_sbindir}/apxs
@@ -128,8 +133,8 @@ prestandan jämfört med den traditionella CGI-metoden.
 #%patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
+#%patch3 -p1
+#%patch4 -p1
 
 %build
 %{__aclocal}
@@ -148,18 +153,19 @@ install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%{apxs} -e -a -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
 if [ -f /var/lock/subsys/httpd ]; then
 	/etc/rc.d/init.d/httpd restart 1>&2
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-	%{apxs} -e -A -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
 	if [ -f /var/lock/subsys/httpd ]; then
 		/etc/rc.d/init.d/httpd restart 1>&2
 	fi
@@ -170,4 +176,5 @@ fi
 %doc doc-html/*
 %doc README COPYRIGHT NEWS CREDITS
 %attr(755,root,root) %{apache_moddir}/*
-%{py_sitedir}/mod_%{mod_name}
+%dir %{py_sitedir}/mod_%{mod_name}
+%{py_sitedir}/mod_%{mod_name}/*.py[co]
