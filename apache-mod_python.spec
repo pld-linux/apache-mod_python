@@ -36,12 +36,21 @@ NOTE: This versions should still be considered Beta
 %build
 python %{python_libdir}/compileall.py lib/python/mod_python/
 
-PTHREADS=
+LDFLAGS=
+# RH  
+if [ -f %{python_libdir}/config/libpython%{python_version}.a ]; then 
+	LDFLAGS="$LDFLAGS -L%{python_libdir}/config/ -lpython%{python_version}"
+# PLD 
+else  
+	LDFLAGS="$LDFLAGS -lpython"
+fi  
+ 
 if ldd %{python_prefix}/bin/python | grep libpthread >/dev/null; then 
-        PTHREADS=-lpthread
-fi   
+        LDFLAGS="$LDFLAGS -lpthread"
+fi 
+
 cd src
-/usr/sbin/apxs -I%{python_includedir} -lpython $PTHREADS -o mod_%{mod_name}.so -c mod_%{mod_name}.c
+/usr/sbin/apxs -I%{python_includedir} $LDFLAGS -o mod_%{mod_name}.so -c mod_%{mod_name}.c
 cd ..
 gzip -9nf README COPYRIGHT
 
