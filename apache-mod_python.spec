@@ -30,12 +30,12 @@ Source1:	%{name}.conf
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-no-compile.patch
 URL:		http://www.modpython.org/
+BuildRequires:	%{apxs}
+BuildRequires:	apache-devel >= 2.0.44
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	apache-devel >= 2.0.44
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
-BuildRequires:	%{apxs}
 Prereq:		%{_sbindir}/apxs
 Requires:	apache >= 2.0.44
 %pyrequires_eq	python
