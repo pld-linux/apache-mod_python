@@ -13,7 +13,7 @@ Summary(id):	Interpreter Perl untuk web server Apache
 Summary(is):	Perl tЗlkur fyrir Apache vefЧjСninn
 Summary(it):	Interprete Python integrato per il server Web Apache
 Summary(ja):	Apache Web ╔╣║╪╔п║╪мя╓нах╧Ч╓ъ Perl ╔╓╔С╔©║╪╔в╔Й╔©
-Summary(no):	En Python-fortolker for webtjeneren Apache
+Summary(nb):	En Python-fortolker for webtjeneren Apache
 Summary(pl):	Wbudowany interpreter jЙzyka Python dla serwera WWW Apache
 Summary(pt):	Um interpretador de Perl embebido para o servidor Web Apache
 Summary(ru):	Встроенный интерпретатор Perl для WWW-сервера Apache
