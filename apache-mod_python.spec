@@ -20,17 +20,18 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	2.7.8
-Release:	7
+Release:	8
 License:	distributable
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
 # Source0-md5:	4d5bee8317bfb45a3bb09f02b435e917
-#Patch0:		%{name}-shared.patch
+Patch0:		%{name}-shared.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-Makefile-in.patch
 Patch3:		%{name}-cleanup.patch
 # PLD keeps static libs in /usr/lib default python install stores them in .../config/
 Patch4:		%{name}-static-lib-dir-fix.patch
+Patch5:		%{name}-DEAPI_fix.patch
 
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
@@ -124,20 +125,24 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
-# Patch reverted. Dynamic build makes apache segfault on all my i686 machines
-# No working reports collected on IRC/mailing lists.
+
+# Use patch0 to link with libpython.so or patch4 to build with static 
+# libpython.a. Dynamic build makes apache segfault.
+
 #%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__aclocal}
 %{__autoconf}
 
 # new apache needs it
-CFLAGS="-DEAPI %{rpmcflags}"
+export CFLAGS="-DEAPI %{rpmcflags}"
+export OPT="-DEAPI %{rpmcflags}"
 %configure \
 	--with-apxs=%{apxs}
 
