@@ -1,0 +1,12 @@
+diff -uNr mod_python-2.7.6.orig/Makefile.in mod_python-2.7.6/Makefile.in
+--- mod_python-2.7.6.orig/Makefile.in	Wed Dec  6 04:05:37 2000
++++ mod_python-2.7.6/Makefile.in	Wed Feb  6 09:38:50 2002
+@@ -119,7 +119,7 @@
+ 	do \
+ 		$(INSTALL) $$f $(PY_STD_LIB)/site-packages/mod_python; \
+ 	done
+-	python $(PY_STD_LIB)/compileall.py $(PY_STD_LIB)/site-packages/mod_python
++	python $(PY_STD_LIB)/compileall.pyc $(PY_STD_LIB)/site-packages/mod_python
+ 
+ clean:
+ 	cd src && $(MAKE) clean
