@@ -36,7 +36,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	%{apxs}
 Prereq:		%{_sbindir}/apxs
 Requires:	apache
-%requires_eq	python
+%pyrequires_eq	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		apache_moddir	%(%{apxs} -q LIBEXECDIR)
