@@ -133,7 +133,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %build
 aclocal
-autoconf
+%{__autoconf}
 
 # new apache needs it
 CFLAGS="-DEAPI %{rpmcflags}"
