@@ -10,3 +10,15 @@ diff -uNr mod_python-2.7.6/Makefile.in mod_python-2.7.6.orig/Makefile.in
  
  clean:
  	cd src && $(MAKE) clean
+diff -uNr mod_python-2.7.8.orig/src/Makefile.in mod_python-2.7.8/src/Makefile.in
+--- mod_python-2.7.8.orig/src/Makefile.in	Wed Jul  9 12:40:59 2003
++++ mod_python-2.7.8/src/Makefile.in	Wed Jul  9 12:43:48 2003
+@@ -100,7 +100,7 @@
+ 	@echo static > .install
+ 
+ depend:
+-	@$(MKDEP) $(CFLAGS) `echo $(OBJS) | tr ' ' '\012' | \
++	@$(MKDEP) $(INCLUDES) `echo $(OBJS) | tr ' ' '\012' | \
+ 			sed 's|\(.*\)\.o|$(srcdir)/\1.c|'`
+ 
+ clean:
