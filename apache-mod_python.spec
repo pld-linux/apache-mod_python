@@ -20,7 +20,7 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	2.7.11
-Release:	0.1
+Release:	1
 License:	distributable
 Group:		Networking/Daemons
 #Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
