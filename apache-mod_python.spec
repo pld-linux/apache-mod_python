@@ -1,3 +1,4 @@
+%include	/usr/lib/rpm/macros.python
 %define		mod_name	python
 Summary:	A Python for the Apache Web server
 Summary(pl):	Python dla serwera WWW Apache
@@ -7,7 +8,10 @@ Release:	4
 License:	distributable
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
+Group(es):	Red/Servidores
+Group(fr):	Réseau/Serveurs
 Group(pl):	Sieciowe/Serwery
+Group(pt):	Rede/Server
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
 Patch0:		apache-mod_python-shared.patch
 Patch1:		apache-mod_python-DESTDIR.patch
@@ -21,9 +25,7 @@ Requires:	apache
 %requires_eq	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	apache_moddir  %(/usr/sbin/apxs -q LIBEXECDIR)
-
-%include /usr/lib/rpm/macros.python
+%define		apache_moddir	%(/usr/sbin/apxs -q LIBEXECDIR)
 
 %description
 mod_python allows embedding Python within the Apache Web server for a
@@ -48,7 +50,7 @@ Uwaga: ta wersja nadal powinna byæ uwa¿ana za Beta.
 autoconf
 
 # new apache needs it
-CFLAGS=-DEAPI
+CFLAGS="-DEAPI %{rpmcflags}"
 %configure \
 	--with-apxs=/usr/sbin/apxs
  
