@@ -1,0 +1,12 @@
+--- mod_python-2.7.8/configure.in	Mon Jun 11 21:16:25 2001
++++ mod_python-2.7.8.new/configure.in	Wed Oct 16 16:11:36 2002
+@@ -242,7 +242,8 @@
+ if test -z "$PYTHON_SRC"; then
+   PyLIBP=${PyEXEC_INSTALLDIR}/lib/python${PyVERSION}
+   PyLIBPL=${PyLIBP}/config
+-  PyPYTHONLIBS=${PyLIBPL}/libpython${PyVERSION}.a
++  # PyPYTHONLIBS=${PyLIBPL}/libpython${PyVERSION}.a
++  PyPYTHONLIBS=/usr/lib/libpython${PyVERSION}.a
+   PyLIBS=`grep "^LIB[[SMC]]=" ${PyLIBPL}/Makefile | cut -f2 -d= | tr '\011\012\015' '   '`
+   PyMODLIBS=`grep "^LOCALMODLIBS=" ${PyLIBPL}/Makefile | cut -f2 -d= | tr '\011\012\015' '   '`
+   PY_LIBS="${PyPYTHONLIBS} ${PyLIBS} ${PyMODLIBS}"
