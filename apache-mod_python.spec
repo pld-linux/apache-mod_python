@@ -3,7 +3,7 @@ Summary:	A Python for the Apache Web server
 Summary(pl):	Python dla serwera WWW Apache
 Name:		apache-mod_%{mod_name}
 Version:	2.7.6
-Release:	3
+Release:	4
 License:	distributable
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -12,13 +12,13 @@ Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
 Patch0:		apache-mod_python-shared.patch
 Patch1:		apache-mod_python-DESTDIR.patch
 URL:		http://www.modpython.org/
-Requires:	apache
-%requires_eq	python
 BuildRequires:	autoconf
 BuildRequires:	apache
 BuildRequires:	apache-devel
-BuildRequires:	python-devel
+BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
+Requires:	apache
+%requires_eq	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	apache_moddir  %(/usr/sbin/apxs -q LIBEXECDIR)
@@ -50,7 +50,7 @@ autoconf
 # new apache needs it
 CFLAGS=-DEAPI
 %configure \
-  --with-apxs=/usr/sbin/apxs
+	--with-apxs=/usr/sbin/apxs
  
 %{__make} dso
 
