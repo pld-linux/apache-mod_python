@@ -1,7 +1,6 @@
 %include	/usr/lib/rpm/macros.python
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
-%define		beta	BETA4
 Summary:	An embedded Python interpreter for the Apache Web server
 Summary(cs):	Vestavìný interpret Pythonu pro WWW server Apache
 Summary(da):	En indbygget Python-fortolker for webtjeneren Apache
@@ -20,11 +19,11 @@ Summary(sk):	Interpreter jazyka Perl pre webový server Apache
 Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	3.0.0
+Version:	3.0.1
 Release:	0.2
 License:	distributable
 Group:		Networking/Daemons
-Source0: http://www.apache.org/dist/httpd/modpython/dev/mod_%{mod_name}-%{version}-%{beta}.tgz
+Source0: 	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
 Source1:        apache-mod_python-3.conf
 #Patch0:		%{name}-shared.patch
 ##Patch1:		%{name}-DESTDIR.patch
@@ -126,7 +125,7 @@ webbservern Apache till en avsevärd ökning av flexibiliteten och
 prestandan jämfört med den traditionella CGI-metoden.
 
 %prep
-%setup -q -n mod_%{mod_name}-%{version}-%{beta}
+%setup -q -n mod_%{mod_name}-%{version}
 # Patch reverted. Dynamic build makes apache segfault on all my i686 machines
 # No working reports collected on IRC/mailing lists.
 #%patch0 -p1
