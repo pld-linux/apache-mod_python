@@ -1,0 +1,17 @@
+--- configure.in~	2002-12-30 19:59:34.000000000 +0100
++++ configure.in	2004-01-25 20:15:31.354535392 +0100
+@@ -244,12 +244,12 @@
+ 
+ # this is where the Python libraries will get installed
+ AC_SUBST(PY_STD_LIB)
+-PY_STD_LIB=${PyEXEC_INSTALLDIR}/lib/python${PyVERSION}
++PY_STD_LIB=${PyEXEC_INSTALLDIR}/lib64/python${PyVERSION}
+ 
+ # set python std library variable
+ AC_SUBST(LIBS)
+ 
+-PyLIBP=${PyEXEC_INSTALLDIR}/lib/python${PyVERSION}
++PyLIBP=${PyEXEC_INSTALLDIR}/lib64/python${PyVERSION}
+ PyLIBPL=${PyLIBP}/config
+ PyPYTHONLIBS=${PyLIBPL}/libpython${PyVERSION}.a
+ PyLIBS=`grep "^LIB[[SMC]]=" ${PyLIBPL}/Makefile | cut -f2 -d= | tr '\011\012\015' '   '`
