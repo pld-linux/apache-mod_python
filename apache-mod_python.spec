@@ -52,7 +52,7 @@ fi
 cd src
 /usr/sbin/apxs -I%{python_includedir} $LDFLAGS -o mod_%{mod_name}.so -c mod_%{mod_name}.c
 cd ..
-gzip -9nf README COPYRIGHT
+gzip -9nf README COPYRIGHT NEWS CREDITS
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -86,4 +86,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{apache_moddir}/*
 %{python_sitedir}/mod_%{mod_name}
 %doc doc/*
-%doc {README,COPYRIGHT}.gz
+%doc {README,COPYRIGHT,NEWS,CREDITS}.gz
