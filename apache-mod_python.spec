@@ -31,7 +31,7 @@ Source1:	%{name}.conf
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0.44
-# BuildRequires:	apr-devel >= 1:0.9.4-1
+BuildRequires:	apr-devel >= 1:0.9.4-1
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex >= 2.5.31
