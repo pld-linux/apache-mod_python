@@ -21,7 +21,7 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.0.0
-Release:	0.1
+Release:	0.2
 License:	distributable
 Group:		Networking/Daemons
 Source0: http://www.apache.org/dist/httpd/modpython/dev/mod_%{mod_name}-%{version}-%{beta}.tgz
@@ -178,4 +178,4 @@ fi
 %doc README COPYRIGHT NEWS CREDITS
 %attr(755,root,root) %{apache_moddir}/*
 %{py_sitedir}/mod_%{mod_name}
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/httpd.conf/*_mod_python.conf
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/httpd/httpd.conf/*_mod_python.conf
