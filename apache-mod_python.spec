@@ -28,6 +28,7 @@ Source1:	%{name}.conf
 Patch0:		%{name}-lib64.patch
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
+BuildRequires:	apache >= 2.0.44
 BuildRequires:	apache-devel >= 2.0.44
 BuildRequires:	apr-devel >= 1:0.9.4-1
 BuildRequires:	autoconf
