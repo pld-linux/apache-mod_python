@@ -29,14 +29,14 @@ Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-Makefile-in.patch
 Patch3:		%{name}-cleanup.patch
 # PLD keeps static libs in /usr/lib default python install stores them in .../config/
-Patch4: 	%{name}-static-lib-dir-fix.patch
+Patch4:		%{name}-static-lib-dir-fix.patch
 
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	apache-devel
 BuildRequires:	python-devel >= 2.2
-BuildRequires:  python-static >= 2.2
+BuildRequires:	python-static >= 2.2
 BuildRequires:	rpm-pythonprov
 BuildRequires:	%{apxs}
 Prereq:		%{_sbindir}/apxs
