@@ -13,7 +13,7 @@ Summary(is):	Perl túlkur fyrir Apache vefşjóninn
 Summary(it):	Interprete Python integrato per il server Web Apache
 Summary(ja):	Apache Web ¥µ¡¼¥Ğ¡¼ÍÑ¤ÎÁÈ¹ş¤ß Perl ¥¤¥ó¥¿¡¼¥×¥ê¥¿
 Summary(no):	En Python-fortolker for webtjeneren Apache
-Summary(pl):	Wbudowany interpreter Pythona dla serwera WWW Apache
+Summary(pl):	Wbudowany interpreter jêzyka Python dla serwera WWW Apache
 Summary(pt):	Um interpretador de Perl embebido para o servidor Web Apache
 Summary(ru):	÷ÓÔÒÏÅÎÎÙÊ ÉÎÔÅÒĞÒÅÔÁÔÏÒ Perl ÄÌÑ WWW-ÓÅÒ×ÅÒÁ Apache
 Summary(sk):	Interpreter jazyka Perl pre webovı server Apache
@@ -21,7 +21,7 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.0.1
-Release:	0.3
+Release:	1
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
