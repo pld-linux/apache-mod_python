@@ -3,7 +3,7 @@ Summary:	A Python for the Apache Web server
 Summary(pl):	Python dla serwera WWW Apache
 Name:		apache-mod_%{mod_name}
 Version:	2.7.6
-Release:	2
+Release:	3
 License:	distributable
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -81,7 +81,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc/*
+%doc doc-html/*
 %doc {README,COPYRIGHT,NEWS,CREDITS}.gz
 %attr(755,root,root) %{apache_moddir}/*
 %{py_sitedir}/mod_%{mod_name}
