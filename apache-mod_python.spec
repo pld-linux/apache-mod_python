@@ -1,5 +1,4 @@
 
-%include	/usr/lib/rpm/macros.python
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
 
