@@ -40,6 +40,7 @@ BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
 Requires(post,preun):	%{apxs}
 Requires:	apache >= 2.0.44
+Requires:	python-devel-tools
 %pyrequires_eq	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
