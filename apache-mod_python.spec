@@ -139,8 +139,10 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
-%{__make} install_py_lib DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+%{__make} install_py_lib \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
 
@@ -164,8 +166,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc-html/*
-%doc README COPYRIGHT NEWS CREDITS
+%doc doc-html/* README COPYRIGHT NEWS CREDITS
 %{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
 %attr(755,root,root) %{apache_moddir}/*
 %dir %{py_sitedir}/mod_%{mod_name}
