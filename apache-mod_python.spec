@@ -1,12 +1,14 @@
 %define		mod_name	python
 Summary:	A Python for the Apache Web server
 Name:		apache-mod_%{mod_name}
-Version:	2.4.1
+Version:	2.6.4
 Release:	1
 License:	distributable
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Source:	        http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
+Patch0:		apache-mod_python-shared.patch
+Patch1:		apache-mod_python-DESTDIR.patch
 URL:		http://www.modpython.org/
 Requires:	apache
 Requires:	python 
@@ -31,37 +33,21 @@ NOTE: This versions should still be considered Beta
 
 %prep 
 %setup -q -n mod_%{mod_name}-%{version}
+%patch0 -p1
+%patch1 -p1
 
 %build
-python %{python_libdir}/compileall.py lib/python/mod_python/
-
-LDFLAGS=
-# RH  
-if [ -f %{python_libdir}/config/libpython%{python_version}.a ]; then 
-	LDFLAGS="$LDFLAGS -L%{python_libdir}/config/ -lpython%{python_version}"
-# PLD 
-else  
-	LDFLAGS="$LDFLAGS -lpython"
-fi  
- 
-if ldd %{python_prefix}/bin/python | grep libpthread >/dev/null; then 
-        LDFLAGS="$LDFLAGS -lpthread"
-fi 
-
-cd src
-/usr/sbin/apxs -I%{python_includedir} $LDFLAGS -o mod_%{mod_name}.so -c mod_%{mod_name}.c
-cd ..
-gzip -9nf README COPYRIGHT NEWS CREDITS
+autoconf
+%{configure} --with-apxs=/usr/sbin/apxs
+%{__make} dso
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{apache_moddir},%{python_sitedir}/mod_%{mod_name}}
 
-install src/mod_%{mod_name}.so $RPM_BUILD_ROOT%{apache_moddir}
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{apache_moddir}/* 
-
-install lib/python/mod_python/* $RPM_BUILD_ROOT%{python_sitedir}/mod_%{mod_name}
+gzip -9nf README COPYRIGHT NEWS CREDITS
 
 %post
 /usr/sbin/apxs -e -a -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
