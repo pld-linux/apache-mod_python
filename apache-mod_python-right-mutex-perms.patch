@@ -1,0 +1,15 @@
+--- mod_python-3.1.2b.orig/src/mod_python.c	2003-10-22 21:57:04.000000000 +0200
++++ mod_python-3.1.2b/src/mod_python.c	2003-12-16 22:33:03.000000000 +0100
+@@ -419,7 +419,11 @@
+         }
+         else {
+ #if !defined(OS2) && !defined(WIN32) && !defined(BEOS) && !defined(NETWARE)
+-            chown(fname, unixd_config.user_id, -1);
++			if( !geteuid() )
++			{
++	            chown(fname, unixd_config.user_id, -1);
++				unixd_set_global_mutex_perms(mutex[n]);
++			}
+ #endif
+         }
+     }
