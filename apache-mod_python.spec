@@ -25,6 +25,7 @@ Release:	0.1
 License:	distributable
 Group:		Networking/Daemons
 Source0: http://www.apache.org/dist/httpd/modpython/dev/mod_%{mod_name}-%{version}-%{beta}.tgz
+Source1:        apache-mod_python-3.conf
 #Patch0:		%{name}-shared.patch
 ##Patch1:		%{name}-DESTDIR.patch
 #Patch2:		%{name}-Makefile-in.patch
@@ -47,6 +48,7 @@ Requires:	apache
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		apache_moddir	%(%{apxs} -q LIBEXECDIR)
+%define         apache_confdir	%(%{apxs} -q SYSCONFDIR)/httpd.conf
 
 %description
 Mod_python is a module that embeds the Python language interpreter
@@ -147,9 +149,11 @@ CFLAGS="-DEAPI %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}}
+install -d $RPM_BUILD_ROOT{%{apache_moddir},%{apache_confdir},%{py_sitedir}/mod_%{mod_name}}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{apache_confdir}/66_mod_python.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
