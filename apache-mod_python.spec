@@ -32,7 +32,6 @@ Patch3:		%{name}-cleanup.patch
 # PLD keeps static libs in /usr/lib default python install stores them in .../config/
 Patch4:		%{name}-static-lib-dir-fix.patch
 Patch5:		%{name}-DEAPI_fix.patch
-
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -152,7 +151,8 @@ export OPT="-DEAPI %{rpmcflags}"
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -173,7 +173,6 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc-html/*
-%doc README COPYRIGHT NEWS CREDITS
+%doc doc-html/* README COPYRIGHT NEWS CREDITS
 %attr(755,root,root) %{apache_moddir}/*
 %{py_sitedir}/mod_%{mod_name}
