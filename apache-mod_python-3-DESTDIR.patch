@@ -1,0 +1,30 @@
+--- Makefile.in.es	Fri Nov  1 13:32:49 2002
++++ Makefile.in	Fri Nov  1 13:34:47 2002
+@@ -92,7 +92,8 @@
+ 	@echo
+ 	@echo "Performing DSO installation."
+ 	@echo
+-	$(INSTALL) src/mod_python.so $(LIBEXECDIR)
++	$(INSTALL) -d $(DESTDIR)$(LIBEXECDIR)
++	$(INSTALL) src/mod_python.so $(DESTDIR)$(LIBEXECDIR)
+ 	@$(MAKE) install_py_lib
+ 	@echo
+ 	@echo "Now don't forget to edit your main config and add"
+@@ -102,13 +103,13 @@
+ 	@echo
+ 
+ install_py_lib:
+-	$(INSTALL) -d $(PY_STD_LIB)/site-packages/mod_python
++	$(INSTALL) -d $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python
+ 	@for f in `ls lib/python/mod_python/*.py`; \
+ 	do \
+-		$(INSTALL) $$f $(PY_STD_LIB)/site-packages/mod_python; \
++		$(INSTALL) $$f $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python; \
+ 	done
+-	${PYTHON_BIN} $(PY_STD_LIB)/compileall.py $(PY_STD_LIB)/site-packages/mod_python
+-	${PYTHON_BIN} -O $(PY_STD_LIB)/compileall.py $(PY_STD_LIB)/site-packages/mod_python
++	${PYTHON_BIN} $(PY_STD_LIB)/compileall.pyc $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python
++	${PYTHON_BIN} -O $(PY_STD_LIB)/compileall.pyc $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python
+ 
+ clean:
+ 	cd src && $(MAKE) clean
