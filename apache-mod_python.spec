@@ -22,7 +22,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define python_includedir  %{python_prefix}/include/python%{python_version}
 %define python_sitedir     %{python_libdir}/site-packages
 
-
 %description
 mod_python allows embedding Python within the Apache Web server 
 for a considerable boost in performance and added flexibility 
@@ -56,12 +55,12 @@ gzip -9nf README COPYRIGHT NEWS CREDITS
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{apache_moddir},%{python_sitedir}/mod_%{mod_name}}
 
-install -d $RPM_BUILD_ROOT%{apache_moddir}
 install src/mod_%{mod_name}.so $RPM_BUILD_ROOT%{apache_moddir}
+
 strip --strip-unneeded $RPM_BUILD_ROOT%{apache_moddir}/* 
 
-install -d $RPM_BUILD_ROOT%{python_sitedir}/mod_%{mod_name}
 install lib/python/mod_python/* $RPM_BUILD_ROOT%{python_sitedir}/mod_%{mod_name}
 
 %post
@@ -83,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{apache_moddir}/*
-%{python_sitedir}/mod_%{mod_name}
 %doc doc/*
 %doc {README,COPYRIGHT,NEWS,CREDITS}.gz
+%attr(755,root,root) %{apache_moddir}/*
+%{python_sitedir}/mod_%{mod_name}
