@@ -1,5 +1,6 @@
 %include	/usr/lib/rpm/macros.python
 %define		mod_name	python
+%define 	apxs		/usr/sbin/apxs
 Summary:	An embedded Python interpreter for the Apache Web server
 Summary(cs):	Vestavìný interpret Pythonu pro WWW server Apache
 Summary(da):	En indbygget Python-fortolker for webtjeneren Apache
@@ -43,15 +44,16 @@ Patch2:		apache-mod_python-Makefile-in.patch
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	apache
 BuildRequires:	apache-devel
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
+BuildRequires:	%{apxs}
+Prereq:		%{_sbindir}/apxs
 Requires:	apache
 %requires_eq	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		apache_moddir	%(/usr/sbin/apxs -q LIBEXECDIR)
+%define		apache_moddir	%(%{apxs} -q LIBEXECDIR)
 
 %description
 Mod_python is a module that embeds the Python language interpreter
@@ -150,7 +152,7 @@ autoconf
 # new apache needs it
 CFLAGS="-DEAPI %{rpmcflags}"
 %configure \
-	--with-apxs=/usr/sbin/apxs
+	--with-apxs=%{apxs}
 
 %{__make} dso
 
@@ -166,14 +168,14 @@ gzip -9nf README COPYRIGHT NEWS CREDITS
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/usr/sbin/apxs -e -a -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
+%{_sbindir}/apxs -e -a -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
 if [ -f /var/lock/subsys/httpd ]; then
 	/etc/rc.d/init.d/httpd restart 1>&2
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-	/usr/sbin/apxs -e -A -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
+	%{_sbindir}/apxs -e -A -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
 	if [ -f /var/lock/subsys/httpd ]; then
 		/etc/rc.d/init.d/httpd restart 1>&2
 	fi
