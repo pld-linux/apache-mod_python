@@ -1,0 +1,12 @@
+diff -Nur mod_python-3.1.0a.orig/dist/Makefile.in mod_python-3.1.0a/dist/Makefile.in
+--- mod_python-3.1.0a.orig/dist/Makefile.in	Fri Jun 13 04:52:03 2003
++++ mod_python-3.1.0a/dist/Makefile.in	Wed Oct  8 01:16:59 2003
+@@ -73,7 +73,7 @@
+ # this may require root privilidges
+ install_py_lib: mod_python src
+ 	@cd src; $(MAKE) psp_parser.c
+-	$(PYTHON_BIN) setup.py install --optimize 2 --force; \
++	$(PYTHON_BIN) setup.py install --optimize 2 --root=$(DESTDIR); \
+ 
+ mod_python.so:
+ 	@echo "Please place a WIN32 compiled mod_python.so in this directory"
