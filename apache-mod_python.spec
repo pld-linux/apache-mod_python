@@ -15,6 +15,7 @@ Group(pt):	Rede/Server
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
 Patch0:		apache-mod_python-shared.patch
 Patch1:		apache-mod_python-DESTDIR.patch
+Patch2:		apache-mod_python-Makefile-in.patch
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -42,6 +43,7 @@ tworzeniu aplikacji opartych na WWW.
 %setup -q -n mod_%{mod_name}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 aclocal
