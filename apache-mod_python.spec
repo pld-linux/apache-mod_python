@@ -20,19 +20,24 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	2.7.8
-Release:	3
+Release:	7
 License:	distributable
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
-Patch0:		%{name}-shared.patch
+# Source0-md5:	4d5bee8317bfb45a3bb09f02b435e917
+#Patch0:		%{name}-shared.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-Makefile-in.patch
 Patch3:		%{name}-cleanup.patch
+# PLD keeps static libs in /usr/lib default python install stores them in .../config/
+Patch4:		%{name}-static-lib-dir-fix.patch
+
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	apache-devel
-BuildRequires:	python-devel >= 2.2
+BuildRequires:	python-devel >= 2.2.3
+BuildRequires:	python-static >= 2.2.3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	%{apxs}
 Prereq:		%{_sbindir}/apxs
@@ -119,13 +124,16 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
-%patch0 -p1
+# Patch reverted. Dynamic build makes apache segfault on all my i686 machines
+# No working reports collected on IRC/mailing lists.
+#%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
-aclocal
+%{__aclocal}
 %{__autoconf}
 
 # new apache needs it
@@ -141,20 +149,18 @@ install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-gzip -9nf README COPYRIGHT NEWS CREDITS
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%{_sbindir}/apxs -e -a -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
+%{apxs} -e -a -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
 if [ -f /var/lock/subsys/httpd ]; then
 	/etc/rc.d/init.d/httpd restart 1>&2
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-	%{_sbindir}/apxs -e -A -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
+	%{apxs} -e -A -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
 	if [ -f /var/lock/subsys/httpd ]; then
 		/etc/rc.d/init.d/httpd restart 1>&2
 	fi
@@ -163,6 +169,6 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc doc-html/*
-%doc {README,COPYRIGHT,NEWS,CREDITS}.gz
+%doc README COPYRIGHT NEWS CREDITS
 %attr(755,root,root) %{apache_moddir}/*
 %{py_sitedir}/mod_%{mod_name}
