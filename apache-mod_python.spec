@@ -1,7 +1,7 @@
 %define		mod_name	python
 Summary:	A Python for the Apache Web server
 Name:		apache-mod_%{mod_name}
-Version:	2.2
+Version:	2.4
 Release:	1
 License:	distributable
 Group:		Networking/Daemons
