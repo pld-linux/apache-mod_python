@@ -1,7 +1,5 @@
-
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
-
 Summary:	An embedded Python interpreter for the Apache Web server
 Summary(cs):	Vestavìný interpret Pythonu pro WWW server Apache
 Summary(da):	En indbygget Python-fortolker for webtjeneren Apache
@@ -44,7 +42,8 @@ Requires:	python-devel-tools
 %pyrequires_eq	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		apache_moddir	%(%{apxs} -q LIBEXECDIR)
+%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR)
+%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR)
 
 %description
 Mod_python is a module that embeds the Python language interpreter
@@ -140,13 +139,13 @@ CFLAGS="-DEAPI %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{apache_moddir} \
-	$RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf
+install -d $RPM_BUILD_ROOT%{_pkglibdir} \
+	$RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/60_mod_python.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -166,8 +165,8 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc doc-html/* README COPYRIGHT NEWS CREDITS
-%{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
-%attr(755,root,root) %{apache_moddir}/*
+%{_sysconfdir}/httpd.conf/60_mod_python.conf
+%attr(755,root,root) %{_pkglibdir}/*.so
 %dir %{py_sitedir}/mod_%{mod_name}
 %attr(755,root,root) %{py_sitedir}/mod_%{mod_name}/*.so
 %{py_sitedir}/mod_%{mod_name}/*.py[co]
