@@ -30,13 +30,8 @@ Release:	0.2
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
-#Patch0:		%{name}-shared.patch
-Patch1:		%{name}-DESTDIR.patch
-Patch2:		%{name}-no-compile.patch
-Patch3:		%{name}-cleanup.patch
-# PLD keeps static libs in /usr/lib default python install stores them in .../config/
-Patch4:		%{name}-static-lib-dir-fix.patch
-
+Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-no-compile.patch
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -128,13 +123,8 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
-# Patch reverted. Dynamic build makes apache segfault on all my i686 machines
-# No working reports collected on IRC/mailing lists.
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
-%patch2 -p1
-#%patch3 -p1
-#%patch4 -p1
 
 %build
 %{__aclocal}
