@@ -2,6 +2,7 @@
 %include	/usr/lib/rpm/macros.python
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
+
 Summary:	An embedded Python interpreter for the Apache Web server
 Summary(cs):	Vestavìný interpret Pythonu pro WWW server Apache
 Summary(da):	En indbygget Python-fortolker for webtjeneren Apache
@@ -20,17 +21,13 @@ Summary(sk):	Interpreter jazyka Perl pre webový server Apache
 Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	3.1.0a
-Release:	2
+Version:	3.1.2b
+Release:	1
 License:	Apache Group License
 Group:		Networking/Daemons
-Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
-# Source0-md5:	7fa136fafa3f13f84849789a5e388f71
+Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
+# Source0-md5:	0f561ba64e08f2990c9f22a0527ec5b5
 Source1:	%{name}.conf
-Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-no-compile.patch
-Patch2:		%{name}-flex.patch
-Patch3:		%{name}-python.patch
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0.44
@@ -124,10 +121,6 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 %{__aclocal}
