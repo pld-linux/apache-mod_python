@@ -22,7 +22,7 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.1.3
-Release:	1
+Release:	2
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
@@ -139,18 +139,13 @@ CFLAGS="-DEAPI %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}} \
+install -d $RPM_BUILD_ROOT%{apache_moddir} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-%{__make} install_py_lib \
-	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
-
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -173,4 +168,5 @@ fi
 %{_sysconfdir}/httpd/httpd.conf/60_mod_python.conf
 %attr(755,root,root) %{apache_moddir}/*
 %dir %{py_sitedir}/mod_%{mod_name}
+%attr(755,root,root) %{py_sitedir}/mod_%{mod_name}/*.so
 %{py_sitedir}/mod_%{mod_name}/*.py[co]
