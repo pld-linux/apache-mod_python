@@ -38,7 +38,6 @@ BuildRequires:	automake
 BuildRequires:	flex >= 2.5.31
 BuildRequires:	python
 BuildRequires:	python-devel >= 2.2
-BuildRequires:	rpm-pythonprov
 Requires(post,preun):	%{apxs}
 Requires:	apache >= 2.0.52-7
 Requires:	apr >= 1:1.0.0
