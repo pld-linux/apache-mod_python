@@ -141,8 +141,6 @@ install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-gzip -9nf README COPYRIGHT NEWS CREDITS
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -163,6 +161,6 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc doc-html/*
-%doc {README,COPYRIGHT,NEWS,CREDITS}.gz
+%doc README COPYRIGHT NEWS CREDITS
 %attr(755,root,root) %{apache_moddir}/*
 %{py_sitedir}/mod_%{mod_name}
