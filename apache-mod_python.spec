@@ -1,17 +1,20 @@
 %define		mod_name	python
 Summary:	A Python for the Apache Web server
+Summary(pl):	Python dla serwera WWW Apache
 Name:		apache-mod_%{mod_name}
 Version:	2.7.2
 Release:	0.1
 License:	distributable
 Group:		Networking/Daemons
+Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
-Source:	        http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
+Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
 Patch0:		apache-mod_python-shared.patch
 Patch1:		apache-mod_python-DESTDIR.patch
 URL:		http://www.modpython.org/
 Requires:	apache
 Requires:	python 
+BuildRequires:	autoconf
 BuildRequires:	apache
 BuildRequires:	apache-devel
 BuildRequires:	python-devel
@@ -25,11 +28,18 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define python_sitedir     %{python_libdir}/site-packages
 
 %description
-mod_python allows embedding Python within the Apache Web server 
-for a considerable boost in performance and added flexibility 
-in designing web based applications. 
+mod_python allows embedding Python within the Apache Web server for a
+considerable boost in performance and added flexibility in designing
+web based applications.
 
-NOTE: This versions should still be considered Beta
+NOTE: This versions should still be considered Beta.
+
+%description -l pl
+mod_python pozwala na zagnie¿d¿enie pythona w serwerze WWW Apache w
+celu zauwa¿alnej poprawy wydajno¶ci i zwiêkszonej elastyczno¶ci przy
+tworzeniu aplikacji opartych na WWW.
+
+Uwaga: ta wersja nadal powinna byæ uwa¿ana za Beta.
 
 %prep 
 %setup -q -n mod_%{mod_name}-%{version}
@@ -38,7 +48,7 @@ NOTE: This versions should still be considered Beta
 
 %build
 autoconf
-%{configure} --with-apxs=/usr/sbin/apxs
+%configure --with-apxs=/usr/sbin/apxs
 %{__make} dso
 
 %install
@@ -48,6 +58,9 @@ install -d $RPM_BUILD_ROOT{%{apache_moddir},%{python_sitedir}/mod_%{mod_name}}
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 gzip -9nf README COPYRIGHT NEWS CREDITS
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post
 /usr/sbin/apxs -e -a -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
@@ -62,9 +75,6 @@ if [ "$1" = "0" ]; then
 		/etc/rc.d/init.d/httpd restart 1>&2
 	fi
 fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
