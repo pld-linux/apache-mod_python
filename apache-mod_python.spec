@@ -17,6 +17,7 @@ Patch0:		apache-mod_python-shared.patch
 Patch1:		apache-mod_python-DESTDIR.patch
 URL:		http://www.modpython.org/
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	apache
 BuildRequires:	apache-devel
 BuildRequires:	python-devel >= 2.2
@@ -32,14 +33,10 @@ mod_python allows embedding Python within the Apache Web server for a
 considerable boost in performance and added flexibility in designing
 web based applications.
 
-NOTE: This versions should still be considered Beta.
-
 %description -l pl
 mod_python pozwala na zagnie¿d¿enie pythona w serwerze WWW Apache w
 celu zauwa¿alnej poprawy wydajno¶ci i zwiêkszonej elastyczno¶ci przy
 tworzeniu aplikacji opartych na WWW.
-
-Uwaga: ta wersja nadal powinna byæ uwa¿ana za Beta.
 
 %prep 
 %setup -q -n mod_%{mod_name}-%{version}
@@ -47,6 +44,7 @@ Uwaga: ta wersja nadal powinna byæ uwa¿ana za Beta.
 %patch1 -p1
 
 %build
+aclocal
 autoconf
 
 # new apache needs it
