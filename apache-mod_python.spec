@@ -29,16 +29,17 @@ Patch0:		%{name}-lib64.patch
 Patch1:		%{name}-apr-status-is-success.patch
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
-BuildRequires:	apache >= 2.0.44
-BuildRequires:	apache-devel >= 2.0.44
-BuildRequires:	apr-devel >= 1:0.9.4-1
+#BuildRequires:	apache >= 2.0.44
+BuildRequires:	apache-devel >= 2.0.52-7
+BuildRequires:	apr-devel >= 1:1.0.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex >= 2.5.31
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
 Requires(post,preun):	%{apxs}
-Requires:	apache >= 2.0.44
+Requires:	apache >= 2.0.52-7
+Requires:	apr >= 1:1.0.0
 # apache.py uses pdb module
 Requires:	python-devel-tools
 %pyrequires_eq	python
