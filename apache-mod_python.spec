@@ -33,13 +33,13 @@ Patch3:		%{name}-cleanup.patch
 Patch4:		%{name}-static-lib-dir-fix.patch
 Patch5:		%{name}-DEAPI_fix.patch
 URL:		http://www.modpython.org/
+BuildRequires:	%{apxs}
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	apache-devel
 BuildRequires:	python-devel >= 2.2.3
 BuildRequires:	python-static >= 2.2.3
 BuildRequires:	rpm-pythonprov
-BuildRequires:	%{apxs}
 Prereq:		%{_sbindir}/apxs
 Requires:	apache
 %pyrequires_eq	python
