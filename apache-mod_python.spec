@@ -20,11 +20,11 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	2.7.8
-Release:	3
+Release:	4
 License:	distributable
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
-Patch0:		%{name}-shared.patch
+#Patch0:		%{name}-shared.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-Makefile-in.patch
 Patch3:		%{name}-cleanup.patch
@@ -33,6 +33,8 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	apache-devel
 BuildRequires:	python-devel >= 2.2
+# Necessary /usr/lib/python2.2/config/libpython2.2.a -> /usr/lib/libpython2.2.a added in 2.2.1-20
+BuildRequires:  python-static >= 2.2.1-20
 BuildRequires:	rpm-pythonprov
 BuildRequires:	%{apxs}
 Prereq:		%{_sbindir}/apxs
@@ -119,7 +121,9 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
-%patch0 -p1
+# Patch reverted. Dynamic build makes apache segfault on all my i686 machines
+# No working reports collected on IRC/mailing lists.
+#%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
