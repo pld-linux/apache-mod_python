@@ -3,7 +3,7 @@ Summary:	A Python for the Apache Web server
 Summary(pl):	Python dla serwera WWW Apache
 Name:		apache-mod_%{mod_name}
 Version:	2.7.6
-Release:	1
+Release:	2
 License:	distributable
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -46,7 +46,12 @@ Uwaga: ta wersja nadal powinna byæ uwa¿ana za Beta.
 
 %build
 autoconf
-%configure --with-apxs=/usr/sbin/apxs
+
+# new apache needs it
+CFLAGS=-DEAPI
+%configure \
+  --with-apxs=/usr/sbin/apxs
+ 
 %{__make} dso
 
 %install
