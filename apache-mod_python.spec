@@ -25,6 +25,7 @@ Release:	1
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
+# Source0-md5:	41e587e2347449d60ed4ea02ffbc8a14
 Source1:	%{name}.conf
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-no-compile.patch
