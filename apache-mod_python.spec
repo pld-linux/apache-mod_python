@@ -125,7 +125,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 %patch3 -p1
 
 %build
-aclocal
+%{__aclocal}
 %{__autoconf}
 
 # new apache needs it
