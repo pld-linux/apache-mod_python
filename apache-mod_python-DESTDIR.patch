@@ -1,6 +1,7 @@
---- mod_python-2.6.4/Makefile.in.wiget	Tue Dec 12 19:23:28 2000
-+++ mod_python-2.6.4/Makefile.in	Tue Dec 12 19:25:51 2000
-@@ -90,7 +90,8 @@
+diff -Nur mod_python-3.0.1.orig/Makefile.in mod_python-3.0.1/Makefile.in
+--- mod_python-3.0.1.orig/Makefile.in	Fri Nov  8 01:15:10 2002
++++ mod_python-3.0.1/Makefile.in	Thu Feb 27 09:48:44 2003
+@@ -92,7 +92,8 @@
  	@echo
  	@echo "Performing DSO installation."
  	@echo
@@ -10,7 +11,7 @@
  	@$(MAKE) install_py_lib
  	@echo
  	@echo "Now don't forget to edit your main config and add"
-@@ -123,12 +124,12 @@
+@@ -102,13 +103,13 @@
  	@echo
  
  install_py_lib:
@@ -21,8 +22,9 @@
 -		$(INSTALL) $$f $(PY_STD_LIB)/site-packages/mod_python; \
 +		$(INSTALL) $$f $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python; \
  	done
--	python $(PY_STD_LIB)/compileall.py $(PY_STD_LIB)/site-packages/mod_python
-+	python $(PY_STD_LIB)/compileall.py $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python
+ 	${PYTHON_BIN} $(PY_STD_LIB)/compileall.py $(PY_STD_LIB)/site-packages/mod_python
+-	${PYTHON_BIN} -O $(PY_STD_LIB)/compileall.py $(PY_STD_LIB)/site-packages/mod_python
++	${PYTHON_BIN} -O $(PY_STD_LIB)/compileall.py $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python
  
  clean:
  	cd src && $(MAKE) clean
