@@ -1,0 +1,49 @@
+Index: mod_python/lib/python/mod_python/apache.py
+===================================================================
+RCS file: /home/devel/CVS/rhn/modules/mod_python/lib/python/mod_python/apache.py,v
+retrieving revision 1.4
+diff -u -r1.4 apache.py
+--- mod_python/lib/python/mod_python/apache.py	2 Aug 2001 22:52:50 -0000	1.4
++++ mod_python/lib/python/mod_python/apache.py	28 Feb 2002 02:57:53 -0000
+@@ -58,10 +58,6 @@
+ # variable stores the last PythonPath in raw (unevaled) form.
+ _path = None
+ 
+-# this is used in Request.__init__
+-def _cleanup_request(_req):
+-    _req._Request = None
+-
+ class Request:
+     """ This is a normal Python Class that can be subclassed.
+         However, most of its functionality comes from a built-in
+@@ -73,11 +69,6 @@
+         # look at __setattr__ if changing this line!
+         self._req = _req
+         
+-        # this will decrement the reference to the _req
+-        # object at cleanup time. If we don't do this, we
+-        # get a cirular reference and _req never gets destroyed.
+-        _req.register_cleanup(_cleanup_request, _req)
+-
+     def __getattr__(self, attr):
+         try:
+             return getattr(self._req, attr)
+@@ -129,6 +120,7 @@
+ 
+         # is there a Request object for this request?
+         if not _req._Request:
++            # warning, creating circular reference here
+             _req._Request = Request(_req)
+             
+         req = _req._Request
+@@ -239,6 +231,10 @@
+                                           htype=htype, hname=handler, debug=debug)
+             finally:
+                 exc_traceback = None
++
++        if htype == "PythonCleanupHandler":
++            # destroy the circular reference
++            _req._Request = req = None
+ 
+ 	return result
+ 
