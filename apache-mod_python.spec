@@ -13,19 +13,17 @@ Patch0:		apache-mod_python-shared.patch
 Patch1:		apache-mod_python-DESTDIR.patch
 URL:		http://www.modpython.org/
 Requires:	apache
-Requires:	python 
+%requires_eq	python
 BuildRequires:	autoconf
 BuildRequires:	apache
 BuildRequires:	apache-devel
 BuildRequires:	python-devel
+BuildRequires:	rpm-pythonprov
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	apache_moddir  %(/usr/sbin/apxs -q LIBEXECDIR)
-%define python_prefix  %(echo `python -c "import sys; print sys.prefix"`)
-%define python_version %(echo `python -c "import sys; print sys.version[:3]"`)
-%define python_libdir      %{python_prefix}/lib/python%{python_version}
-%define python_includedir  %{python_prefix}/include/python%{python_version}
-%define python_sitedir     %{python_libdir}/site-packages
+
+%include /usr/lib/rpm/macros.python
 
 %description
 mod_python allows embedding Python within the Apache Web server for a
@@ -53,7 +51,7 @@ autoconf
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{apache_moddir},%{python_sitedir}/mod_%{mod_name}}
+install -d $RPM_BUILD_ROOT{%{apache_moddir},%{py_sitedir}/mod_%{mod_name}}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
@@ -81,4 +79,4 @@ fi
 %doc doc/*
 %doc {README,COPYRIGHT,NEWS,CREDITS}.gz
 %attr(755,root,root) %{apache_moddir}/*
-%{python_sitedir}/mod_%{mod_name}
+%{py_sitedir}/mod_%{mod_name}
