@@ -158,18 +158,18 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{apache_confdir}/66_mod_python.conf
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-%{apxs} -e -a -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
+%post 
 if [ -f /var/lock/subsys/httpd ]; then
-	/etc/rc.d/init.d/httpd restart 1>&2
+        /etc/rc.d/init.d/httpd restart 1>&2
+else
+   echo "Run \"/etc/rc.d/init.d/httpd start\" to start apache http daemon."
 fi
 
-%preun
+%preun 
 if [ "$1" = "0" ]; then
-	%{apxs} -e -A -n %{mod_name} %{apache_moddir}/mod_%{mod_name}.so 1>&2
-	if [ -f /var/lock/subsys/httpd ]; then
-		/etc/rc.d/init.d/httpd restart 1>&2
-	fi
+        if [ -f /var/lock/subsys/httpd ]; then
+                /etc/rc.d/init.d/httpd restart 1>&2
+        fi
 fi
 
 %files
@@ -178,3 +178,4 @@ fi
 %doc README COPYRIGHT NEWS CREDITS
 %attr(755,root,root) %{apache_moddir}/*
 %{py_sitedir}/mod_%{mod_name}
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/httpd.conf/*_mod_python.conf
