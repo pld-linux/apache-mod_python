@@ -1,0 +1,12 @@
+diff -Nur mod_python-3.0.1.orig/Makefile.in mod_python-3.0.1/Makefile.in
+--- mod_python-3.0.1.orig/Makefile.in	Thu Feb 27 09:55:00 2003
++++ mod_python-3.0.1/Makefile.in	Thu Feb 27 09:59:39 2003
+@@ -108,8 +108,6 @@
+ 	do \
+ 		$(INSTALL) $$f $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python; \
+ 	done
+-	${PYTHON_BIN} $(PY_STD_LIB)/compileall.py $(PY_STD_LIB)/site-packages/mod_python
+-	${PYTHON_BIN} -O $(PY_STD_LIB)/compileall.py $(DESTDIR)$(PY_STD_LIB)/site-packages/mod_python
+ 
+ clean:
+ 	cd src && $(MAKE) clean
