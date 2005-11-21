@@ -19,7 +19,7 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.1.4
-Release:	2
+Release:	3
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
@@ -38,6 +38,8 @@ BuildRequires:	automake
 BuildRequires:	flex >= 2.5.31
 BuildRequires:	python
 BuildRequires:	python-devel >= 2.2
+# without rpm-pythonprov build fails due to missing /usr/lib/rpm/pythondeps.sh 
+BuildRequires:	rpm-pythonprov
 Requires(post,preun):	%{apxs}
 Requires:	apache >= 2.0.52-7
 Requires:	apr >= 1:1.0.0
