@@ -1,0 +1,2 @@
+- Version 3.13. Release 5.1. Fails on configure, I don't know how to
+  fix it:  configure: error: Qt (>= Qt 2.2.2) (libraries) not found.
