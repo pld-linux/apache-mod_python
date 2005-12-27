@@ -38,8 +38,8 @@ BuildRequires:	flex >= 2.5.31
 BuildRequires:	python
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	apache(modules-api) = %apache_modules_api
-Requires:	apache >= 2.0.52-7
 Requires:	apr >= 1:1.0.0
 # apache.py uses pdb module
 Requires:	python-devel-tools
@@ -151,6 +151,7 @@ install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/60_mod_python.conf
+%py_postclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -170,7 +171,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc doc-html/* README COPYRIGHT NEWS CREDITS
-%{_sysconfdir}/httpd.conf/60_mod_python.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*.so
 %dir %{py_sitedir}/mod_%{mod_name}
 %attr(755,root,root) %{py_sitedir}/mod_%{mod_name}/*.so
