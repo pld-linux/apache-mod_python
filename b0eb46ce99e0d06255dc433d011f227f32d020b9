@@ -1,0 +1,2 @@
+- Dynamic link patch reverted. Dynamic build makes apache segfault on all my i686 machines
+- No reports on working dyn. linked mod_python collected on IRC/mailing lists.
