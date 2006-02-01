@@ -43,7 +43,7 @@ Requires:	apache(modules-api) = %apache_modules_api
 Requires:	apr >= 1:1.0.0
 # apache.py uses pdb module
 Requires:	python-devel-tools
-%pyrequires_eq	python
+%requires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
@@ -163,6 +163,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc doc-html/* README COPYRIGHT NEWS CREDITS
+%doc examples
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_pkglibdir}/*.so
 %dir %{py_sitedir}/mod_%{mod_name}
