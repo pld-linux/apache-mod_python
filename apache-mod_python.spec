@@ -135,12 +135,8 @@ prestandan jämfört med den traditionella CGI-metoden.
 %build
 %{__aclocal}
 %{__autoconf}
-
-# new apache needs it
-CFLAGS="-DEAPI %{rpmcflags}"
 %configure \
 	--with-apxs=%{apxs}
-
 %{__make} dso
 
 %install
