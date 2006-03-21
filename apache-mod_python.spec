@@ -19,16 +19,15 @@ Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.2.8
-Release:	1
+Release:	2
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
 # Source0-md5:	d03452979a6a334f73cc2b95b39db331
 Source1:	%{name}.conf
-Patch0:		%{name}-lib64.patch
-Patch1:		%{name}-apr-status-is-success.patch
-Patch2:		%{name}-httpd-not-needed.patch
-Patch3:		%{name}-ldflags.patch
+Patch0:		%{name}-apr-status-is-success.patch
+Patch1:		%{name}-httpd-not-needed.patch
+Patch2:		%{name}-ldflags.patch
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0.52-7
@@ -127,12 +126,9 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
-%if "%{_libdir}" == "%{_prefix}/lib64"
-%patch0
-%endif
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 %{__aclocal}
