@@ -18,16 +18,15 @@ Summary(sk):	Interpreter jazyka Perl pre webový server Apache
 Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
 Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	3.2.8
-Release:	3
+Version:	3.2.10
+Release:	0.1
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
-# Source0-md5:	d03452979a6a334f73cc2b95b39db331
+# Source0-md5:	cc6439f546a6e70cfff7ca51b8c62541
 Source1:	%{name}.conf
-Patch0:		%{name}-apr-status-is-success.patch
-Patch1:		%{name}-httpd-not-needed.patch
-Patch2:		%{name}-ldflags.patch
+Patch0:		%{name}-httpd-not-needed.patch
+Patch1:		%{name}-ldflags.patch
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0.52-7
@@ -128,7 +127,6 @@ prestandan jämfört med den traditionella CGI-metoden.
 %setup -q -n mod_%{mod_name}-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %{__aclocal}
