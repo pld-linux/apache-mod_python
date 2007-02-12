@@ -1,22 +1,22 @@
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
 Summary:	An embedded Python interpreter for the Apache Web server
-Summary(cs):	Vestavìnı interpret Pythonu pro WWW server Apache
-Summary(da):	En indbygget Python-fortolker for webtjeneren Apache
-Summary(de):	Ein eingebetteter Python-Interpreter für den Apache Web-Server
-Summary(es):	Intérprete Perl para el servidor Web Apache
-Summary(fr):	Interpréteur Python intégré pour le serveur Web Apache
-Summary(id):	Interpreter Perl untuk web server Apache
-Summary(is):	Perl túlkur fyrir Apache vefşjóninn
-Summary(it):	Interprete Python integrato per il server Web Apache
-Summary(ja):	Apache Web ¥µ¡¼¥Ğ¡¼ÍÑ¤ÎÁÈ¹ş¤ß Perl ¥¤¥ó¥¿¡¼¥×¥ê¥¿
-Summary(nb):	En Python-fortolker for webtjeneren Apache
-Summary(pl):	Wbudowany interpreter jêzyka Python dla serwera WWW Apache
-Summary(pt):	Um interpretador de Perl embebido para o servidor Web Apache
-Summary(ru):	÷ÓÔÒÏÅÎÎÙÊ ÉÎÔÅÒĞÒÅÔÁÔÏÒ Perl ÄÌÑ WWW-ÓÅÒ×ÅÒÁ Apache
-Summary(sk):	Interpreter jazyka Perl pre webovı server Apache
-Summary(sl):	Vkljuèeni pythonski tolmaè za spletni stre¾nik Apache
-Summary(sv):	En inbyggd Python-interpretator för webbservern Apache
+Summary(cs.UTF-8):   VestavÄ›nÃ½ interpret Pythonu pro WWW server Apache
+Summary(da.UTF-8):   En indbygget Python-fortolker for webtjeneren Apache
+Summary(de.UTF-8):   Ein eingebetteter Python-Interpreter fÃ¼r den Apache Web-Server
+Summary(es.UTF-8):   IntÃ©rprete Perl para el servidor Web Apache
+Summary(fr.UTF-8):   InterprÃ©teur Python intÃ©grÃ© pour le serveur Web Apache
+Summary(id.UTF-8):   Interpreter Perl untuk web server Apache
+Summary(is.UTF-8):   Perl tÃºlkur fyrir Apache vefÃ¾jÃ³ninn
+Summary(it.UTF-8):   Interprete Python integrato per il server Web Apache
+Summary(ja.UTF-8):   Apache Web ã‚µãƒ¼ãƒãƒ¼ç”¨ã®çµ„è¾¼ã¿ Perl ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ—ãƒªã‚¿
+Summary(nb.UTF-8):   En Python-fortolker for webtjeneren Apache
+Summary(pl.UTF-8):   Wbudowany interpreter jÄ™zyka Python dla serwera WWW Apache
+Summary(pt.UTF-8):   Um interpretador de Perl embebido para o servidor Web Apache
+Summary(ru.UTF-8):   Ğ’ÑÑ‚Ñ€Ğ¾ĞµĞ½Ğ½Ñ‹Ğ¹ Ğ¸Ğ½Ñ‚ĞµÑ€Ğ¿Ñ€ĞµÑ‚Ğ°Ñ‚Ğ¾Ñ€ Perl Ğ´Ğ»Ñ WWW-ÑĞµÑ€Ğ²ĞµÑ€Ğ° Apache
+Summary(sk.UTF-8):   Interpreter jazyka Perl pre webovÃ½ server Apache
+Summary(sl.UTF-8):   VkljuÄeni pythonski tolmaÄ za spletni streÅ¾nik Apache
+Summary(sv.UTF-8):   En inbyggd Python-interpretator fÃ¶r webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.2.10
 Release:	2
@@ -56,72 +56,72 @@ Mod_python brings together the versatility of Python and the power of
 the Apache Web server for a considerable boost in flexibility and
 performance over the traditional CGI approach.
 
-%description -l cs
-Balíèek mod_python obsahuje modul, kterı umo¾ní serveru Apache pøímo
-interpretovat CGI skripty napsané v jazyce Python. To vede k vıraznému
-zvı¹ení rychlosti jejich provedení.
+%description -l cs.UTF-8
+BalÃ­Äek mod_python obsahuje modul, kterÃ½ umoÅ¾nÃ­ serveru Apache pÅ™Ã­mo
+interpretovat CGI skripty napsanÃ© v jazyce Python. To vede k vÃ½raznÃ©mu
+zvÃ½Å¡enÃ­ rychlosti jejich provedenÃ­.
 
-%description -l de
+%description -l de.UTF-8
 Mod_python ist ein Modul, das den Python-Sprachinterpreter innerhalb
-des Servers einbettet und es den Apache-Handlern ermöglicht, in Python
+des Servers einbettet und es den Apache-Handlern ermÃ¶glicht, in Python
 geschrieben zu werden.
 
 Mod_python verbindet die Vielseitigkeit von Python und die
-Leistungsstärke des Apache Web-Servers, was eine enorme Steigerung der
-Flexibilität und Leistung gegenüber dem traditionellen CGI-Ansatz
+LeistungsstÃ¤rke des Apache Web-Servers, was eine enorme Steigerung der
+FlexibilitÃ¤t und Leistung gegenÃ¼ber dem traditionellen CGI-Ansatz
 bedeutet.
 
-%description -l es
-Mod_python es un módulo que activa el intérprete de Python en el
+%description -l es.UTF-8
+Mod_python es un mÃ³dulo que activa el intÃ©rprete de Python en el
 servidor, permitiendo que se escriban gestores para Apache en Python.
 
 Mod_python proporciona la versatilidad y el poder del servidor web
 Apache para acelerar considerablemente la flexibilidad y prestaciones
-en comparación a una aproximación tradicional con CGI.
+en comparaciÃ³n a una aproximaciÃ³n tradicional con CGI.
 
-%description -l fr
-Mod_python est un module qui intègre l'interpréteur de langage Python
-dans le serveur, permettant aux gestionnaires Apache d'être écrits en
+%description -l fr.UTF-8
+Mod_python est un module qui intÃ¨gre l'interprÃ©teur de langage Python
+dans le serveur, permettant aux gestionnaires Apache d'Ãªtre Ã©crits en
 Python.
 
-Mod_python conjugue la versatilité de Python et la puissance du
-serveur Web Apache de façon à augmenter considérablement la
-flexibilité et la performance par rapport à une approche CGI
+Mod_python conjugue la versatilitÃ© de Python et la puissance du
+serveur Web Apache de faÃ§on Ã  augmenter considÃ©rablement la
+flexibilitÃ© et la performance par rapport Ã  une approche CGI
 traditionnelle.
 
-%description -l it
-Mod_python è un modulo che integra nel server l'interprete del
+%description -l it.UTF-8
+Mod_python Ã¨ un modulo che integra nel server l'interprete del
 linguaggio Python, in modo che i programmi di gestione possano essere
 scritti in Python.
 
-Mod_python unisce in sé la versatilità di Python e la potenza del
-server Web Apache, con un conseguente accrescimento di flessibilità e
+Mod_python unisce in sÃ© la versatilitÃ  di Python e la potenza del
+server Web Apache, con un conseguente accrescimento di flessibilitÃ  e
 un miglioramento notevole nelle prestazioni rispetto all'approccio
 tradizionale CGI.
 
-%description -l ja
-Mod_python ¤Ï¥µ¡¼¥Ğ¡¼Æâ¤Ë Python
-¸À¸ì¥¤¥ó¥¿¡¼¥×¥ê¥¿¤òÁÈ¤ß¹ş¤ó¤À¥â¥¸¥å¡¼¥ë ¤Ç¤¹¡£¤³¤ì¤Ë¤è¤ê¡¢Apache
-¥Ï¥ó¥É¥é¤ò Python ¤Çµ­½Ò¤Ç¤­¤Ş¤¹¡£ Mod_python ¤Ï¡¢Python ¤ÎÈÆÍÑÀ­¤È
-Apache Web ¥µ¡¼¥Ğ¡¼¤Î¥Ñ¥ï¡¼¤òÁÈ¤ß¹ç¤ï¤»¤ë ¤³¤È¤Ë¤è¤ê¡¢½¾Íè¤Î CGI
-¥¢¥×¥í¡¼¥Á¤«¤é½ÀÆğÀ­¤È¥Ñ¥Õ¥©¡¼¥Ş¥ó¥¹¤òÂçÉı¤Ë¸ş¾å¤µ¤»¤Ş¤¹¡£
+%description -l ja.UTF-8
+Mod_python ã¯ã‚µãƒ¼ãƒãƒ¼å†…ã« Python
+è¨€èªã‚¤ãƒ³ã‚¿ãƒ¼ãƒ—ãƒªã‚¿ã‚’çµ„ã¿è¾¼ã‚“ã ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ« ã§ã™ã€‚ã“ã‚Œã«ã‚ˆã‚Šã€Apache
+ãƒãƒ³ãƒ‰ãƒ©ã‚’ Python ã§è¨˜è¿°ã§ãã¾ã™ã€‚ Mod_python ã¯ã€Python ã®æ±ç”¨æ€§ã¨
+Apache Web ã‚µãƒ¼ãƒãƒ¼ã®ãƒ‘ãƒ¯ãƒ¼ã‚’çµ„ã¿åˆã‚ã›ã‚‹ ã“ã¨ã«ã‚ˆã‚Šã€å¾“æ¥ã® CGI
+ã‚¢ãƒ—ãƒ­ãƒ¼ãƒã‹ã‚‰æŸ”è»Ÿæ€§ã¨ãƒ‘ãƒ•ã‚©ãƒ¼ãƒãƒ³ã‚¹ã‚’å¤§å¹…ã«å‘ä¸Šã•ã›ã¾ã™ã€‚
 
-%description -l pl
-mod_python jest modu³em osadzaj±cym interpreter jêzyka Python w
-serwerze WWW Apache, umo¿liwiaj±c mu obs³ugê kodu napisanego w
+%description -l pl.UTF-8
+mod_python jest moduÅ‚em osadzajÄ…cym interpreter jÄ™zyka Python w
+serwerze WWW Apache, umoÅ¼liwiajÄ…c mu obsÅ‚ugÄ™ kodu napisanego w
 Pythonie.
 
-mod_python ³±czy wszechstronno¶æ Pythona i moc Apache'a jako serwera
-WWW, co daje zwiêkszon± elastyczno¶æ i zauwa¿aln± poprawê wydajno¶ci w
-stosunku do tradycyjnego rozwi±zania opartego na CGI.
+mod_python Å‚Ä…czy wszechstronnoÅ›Ä‡ Pythona i moc Apache'a jako serwera
+WWW, co daje zwiÄ™kszonÄ… elastycznoÅ›Ä‡ i zauwaÅ¼alnÄ… poprawÄ™ wydajnoÅ›ci w
+stosunku do tradycyjnego rozwiÄ…zania opartego na CGI.
 
-%description -l sv
-Mod_python är en modul som bygger in en interpretator för språket
-Python i servern, och låter Apach-hanterare skrivas i Python.
+%description -l sv.UTF-8
+Mod_python Ã¤r en modul som bygger in en interpretator fÃ¶r sprÃ¥ket
+Python i servern, och lÃ¥ter Apach-hanterare skrivas i Python.
 
-Mod_python sammanför mångsidigheten hos Python och kraften hos
-webbservern Apache till en avsevärd ökning av flexibiliteten och
-prestandan jämfört med den traditionella CGI-metoden.
+Mod_python sammanfÃ¶r mÃ¥ngsidigheten hos Python och kraften hos
+webbservern Apache till en avsevÃ¤rd Ã¶kning av flexibiliteten och
+prestandan jÃ¤mfÃ¶rt med den traditionella CGI-metoden.
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
