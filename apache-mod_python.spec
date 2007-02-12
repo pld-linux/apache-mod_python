@@ -1,22 +1,22 @@
 %define		mod_name	python
 %define 	apxs		/usr/sbin/apxs
 Summary:	An embedded Python interpreter for the Apache Web server
-Summary(cs.UTF-8):   Vestavěný interpret Pythonu pro WWW server Apache
-Summary(da.UTF-8):   En indbygget Python-fortolker for webtjeneren Apache
-Summary(de.UTF-8):   Ein eingebetteter Python-Interpreter für den Apache Web-Server
-Summary(es.UTF-8):   Intérprete Perl para el servidor Web Apache
-Summary(fr.UTF-8):   Interpréteur Python intégré pour le serveur Web Apache
-Summary(id.UTF-8):   Interpreter Perl untuk web server Apache
-Summary(is.UTF-8):   Perl túlkur fyrir Apache vefþjóninn
-Summary(it.UTF-8):   Interprete Python integrato per il server Web Apache
-Summary(ja.UTF-8):   Apache Web サーバー用の組込み Perl インタープリタ
-Summary(nb.UTF-8):   En Python-fortolker for webtjeneren Apache
-Summary(pl.UTF-8):   Wbudowany interpreter języka Python dla serwera WWW Apache
-Summary(pt.UTF-8):   Um interpretador de Perl embebido para o servidor Web Apache
-Summary(ru.UTF-8):   Встроенный интерпретатор Perl для WWW-сервера Apache
-Summary(sk.UTF-8):   Interpreter jazyka Perl pre webový server Apache
-Summary(sl.UTF-8):   Vključeni pythonski tolmač za spletni strežnik Apache
-Summary(sv.UTF-8):   En inbyggd Python-interpretator för webbservern Apache
+Summary(cs.UTF-8):	Vestavěný interpret Pythonu pro WWW server Apache
+Summary(da.UTF-8):	En indbygget Python-fortolker for webtjeneren Apache
+Summary(de.UTF-8):	Ein eingebetteter Python-Interpreter für den Apache Web-Server
+Summary(es.UTF-8):	Intérprete Perl para el servidor Web Apache
+Summary(fr.UTF-8):	Interpréteur Python intégré pour le serveur Web Apache
+Summary(id.UTF-8):	Interpreter Perl untuk web server Apache
+Summary(is.UTF-8):	Perl túlkur fyrir Apache vefþjóninn
+Summary(it.UTF-8):	Interprete Python integrato per il server Web Apache
+Summary(ja.UTF-8):	Apache Web サーバー用の組込み Perl インタープリタ
+Summary(nb.UTF-8):	En Python-fortolker for webtjeneren Apache
+Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
+Summary(pt.UTF-8):	Um interpretador de Perl embebido para o servidor Web Apache
+Summary(ru.UTF-8):	Встроенный интерпретатор Perl для WWW-сервера Apache
+Summary(sk.UTF-8):	Interpreter jazyka Perl pre webový server Apache
+Summary(sl.UTF-8):	Vključeni pythonski tolmač za spletni strežnik Apache
+Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.2.10
 Release:	2
