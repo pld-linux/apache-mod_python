@@ -28,7 +28,7 @@ Source1:	%{name}.conf
 Patch0:		%{name}-httpd-not-needed.patch
 Patch1:		%{name}-ldflags.patch
 URL:		http://www.modpython.org/
-BuildRequires:	%{apxs}
+BuildRequires:	apache-apxs >= 2.0.52-7
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
 BuildRequires:	autoconf
