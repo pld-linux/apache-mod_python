@@ -19,7 +19,7 @@ Summary(sl.UTF-8):	Vključeni pythonski tolmač za spletni strežnik Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.3.1
-Release:	1
+Release:	2
 License:	Apache Group License
 Group:		Networking/Daemons
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
@@ -45,8 +45,8 @@ Requires:	python-devel-tools
 %requires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
-%define		_sysconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)
+%define		apachelibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)
+%define		apacheconfdir	%(%{apxs} -q SYSCONFDIR 2>/dev/null)/conf.d
 
 %description
 Mod_python is a module that embeds the Python language interpreter
@@ -137,12 +137,12 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pkglibdir},%{_sysconfdir}/httpd.conf}
+install -d $RPM_BUILD_ROOT{%{apachelibdir},%{apacheconfdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf/60_mod_python.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{apacheconfdir}/60_mod_python.conf
 %py_postclean
 
 %clean
@@ -160,8 +160,8 @@ fi
 %defattr(644,root,root,755)
 %doc doc-html/* README COPYRIGHT NEWS CREDITS
 %doc examples
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf/*_mod_%{mod_name}.conf
-%attr(755,root,root) %{_pkglibdir}/*.so
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{apacheconfdir}/*_mod_%{mod_name}.conf
+%attr(755,root,root) %{apachelibdir}/*.so
 %dir %{py_sitedir}/mod_%{mod_name}
 %attr(755,root,root) %{py_sitedir}/mod_%{mod_name}/*.so
 %{py_sitedir}/mod_%{mod_name}/*.py[co]
