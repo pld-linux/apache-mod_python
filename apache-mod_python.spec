@@ -27,6 +27,7 @@ Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.t
 Source1:	%{name}.conf
 Patch0:		%{name}-httpd-not-needed.patch
 Patch1:		%{name}-ldflags.patch
+Patch2:		%{name}-apr_brigade_sentinel.patch
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0.52-7
@@ -127,6 +128,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 %setup -q -n mod_%{mod_name}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__aclocal}
