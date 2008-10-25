@@ -21,7 +21,7 @@ Name:		apache-mod_%{mod_name}
 Version:	3.3.1
 Release:	5
 License:	Apache Group License
-Group:		Networking/Daemons
+Group:		Networking/Daemons/HTTP
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
 # Source0-md5:	a3b0150176b726bd2833dac3a7837dc5
 Source1:	%{name}.conf
