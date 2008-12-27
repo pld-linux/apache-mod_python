@@ -1,0 +1,40 @@
+diff -urN mod_python-3.2.8/src/connobject.c mod_python-3.2.8.new/src/connobject.c
+--- mod_python-3.2.8/src/connobject.c	2006-02-02 22:30:55.000000000 +0100
++++ mod_python-3.2.8.new/src/connobject.c	2006-03-21 13:47:36.384643750 +0100
+@@ -79,7 +79,7 @@
+         rc = ap_get_brigade(c->input_filters, bb, mode, APR_BLOCK_READ, bufsize);
+         Py_END_ALLOW_THREADS;
+ 
+-        if (! APR_STATUS_IS_SUCCESS(rc)) {
++        if (rc != APR_SUCCESS) {
+             PyErr_SetObject(PyExc_IOError, 
+                             PyString_FromString("Connection read error"));
+             return NULL;
+@@ -321,12 +321,8 @@
+     PyObject *ret = NULL;
+     if (addrobj) {
+         apr_port_t port;
+-        if(apr_sockaddr_port_get(&port, addr)==APR_SUCCESS) {
+-            ret = Py_BuildValue("Oi", addrobj, port );
+-        }
+-        else {
+-            PyErr_SetString(PyExc_SystemError,"apr_sockaddr_port_get failure");
+-        }
++        port = addr->port; 
++        ret = Py_BuildValue("Oi", addrobj, port );
+         Py_DECREF(addrobj);
+     }
+     return ret;
+diff -urN mod_python-3.2.8/src/filterobject.c mod_python-3.2.8.new/src/filterobject.c
+--- mod_python-3.2.8/src/filterobject.c	2004-11-25 23:10:52.000000000 +0100
++++ mod_python-3.2.8.new/src/filterobject.c	2006-03-21 13:25:05.140196250 +0100
+@@ -178,7 +178,7 @@
+                                   APR_BLOCK_READ, self->readbytes);
+         Py_END_ALLOW_THREADS;
+ 
+-        if (!APR_STATUS_IS_EAGAIN(self->rc) && !APR_STATUS_IS_SUCCESS(self->rc)) {
++        if (!APR_STATUS_IS_EAGAIN(self->rc) && !(self->rc == APR_SUCCESS)) {
+             PyErr_SetObject(PyExc_IOError, 
+                             PyString_FromString("Input filter read error"));
+             return NULL;
+
