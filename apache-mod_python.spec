@@ -19,7 +19,7 @@ Summary(sl.UTF-8):	Vključeni pythonski tolmač za spletni strežnik Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.3.1
-Release:	9
+Release:	10
 License:	Apache Group License
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
@@ -31,7 +31,7 @@ Patch2:		%{name}-apr_brigade_sentinel.patch
 URL:		http://www.modpython.org/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.0.52-7
-BuildRequires:	apr-devel >= 1:1.0.0
+BuildRequires:	apr-devel >= 1.0.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex >= 2.5.31
@@ -165,5 +165,8 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{apacheconfdir}/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{apachelibdir}/*.so
 %dir %{py_sitedir}/mod_%{mod_name}
+%if "%{py_ver}" > "2.4"
+%{py_sitedir}/mod_%{mod_name}-*.egg-info
+%endif
 %attr(755,root,root) %{py_sitedir}/mod_%{mod_name}/*.so
 %{py_sitedir}/mod_%{mod_name}/*.py[co]
