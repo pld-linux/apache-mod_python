@@ -19,7 +19,7 @@ Summary(sl.UTF-8):	Vključeni pythonski tolmač za spletni strežnik Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.3.1
-Release:	16
+Release:	17
 License:	Apache
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
@@ -28,6 +28,7 @@ Source1:	%{name}.conf
 Patch0:		%{name}-httpd-not-needed.patch
 Patch1:		%{name}-ldflags.patch
 Patch2:		%{name}-apr_brigade_sentinel.patch
+Patch3:		%{name}-apache24.patch
 URL:		http://www.modpython.org/
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
@@ -128,6 +129,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__aclocal}

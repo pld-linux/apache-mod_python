@@ -1,0 +1,62 @@
+--- mod_python-3.3.1/src/mod_python.c~	2006-11-09 07:21:23.000000000 +0100
++++ mod_python-3.3.1/src/mod_python.c	2013-05-05 21:57:30.378136612 +0200
+@@ -561,8 +561,8 @@
+ 
+ #if !defined(OS2) && !defined(WIN32) && !defined(BEOS) && !defined(NETWARE)
+             if  (!geteuid()) {
+-                chown(fname, unixd_config.user_id, -1);
+-                unixd_set_global_mutex_perms(mutex[n]);
++                chown(fname, ap_unixd_config.user_id, -1);
++                ap_unixd_set_global_mutex_perms(mutex[n]);
+             }
+ #endif
+         }
+--- mod_python-3.3.1/src/serverobject.c~	2006-12-03 05:36:37.000000000 +0100
++++ mod_python-3.3.1/src/serverobject.c	2013-05-05 22:53:26.721477649 +0200
+@@ -191,7 +191,7 @@
+     {"server_hostname",    T_STRING,  OFF(server_hostname)},
+     {"port",               T_SHORT,   OFF(port)},
+     {"error_fname",        T_STRING,  OFF(error_fname)},
+-    {"loglevel",           T_INT,     OFF(loglevel)},
++    {"loglevel",           T_INT,     OFF(log.level)},
+     {"is_virtual",         T_INT,     OFF(is_virtual)},
+     /* XXX implement module_config ? */
+     /* XXX implement lookup_defaults ? */
+@@ -288,7 +288,9 @@
+ 
+ static PyObject *my_generation(serverobject *self, void *objname)
+ {
+-    return PyInt_FromLong((long)ap_my_generation);
++    ap_generation_t mpm_generation;
++    ap_mpm_query(AP_MPMQ_GENERATION, &mpm_generation);
++    return PyInt_FromLong((long)mpm_generation);
+ }
+ 
+ static PyObject *restart_time(serverobject *self, void *objname)
+--- mod_python-3.3.1/src/connobject.c.orig	2013-05-05 23:03:40.876114437 +0200
++++ mod_python-3.3.1/src/connobject.c	2013-05-05 23:10:10.889444946 +0200
+@@ -286,8 +286,10 @@
+     /* XXX vhost_lookup_data? */
+     /* XXX client_socket? */
+     {"local_addr",         T_OBJECT,    0,                       RO},
++    {"client_addr",        T_OBJECT,    0,                       RO},
+     {"remote_addr",        T_OBJECT,    0,                       RO},
+-    {"remote_ip",          T_STRING,    OFF(remote_ip),          RO},
++    {"client_ip",          T_STRING,    OFF(client_ip),          RO},
++    {"remote_ip",          T_STRING,    OFF(client_ip),          RO},
+     {"remote_host",        T_STRING,    OFF(remote_host),        RO},
+     {"remote_logname",     T_STRING,    OFF(remote_logname),     RO},
+     {"aborted",            T_INT,       0,                       RO},
+@@ -414,8 +416,11 @@
+     else if (strcmp(name, "local_addr") == 0) {
+         return makesockaddr(self->conn->local_addr);
+     }
++    else if (strcmp(name, "client_addr") == 0) {
++        return makesockaddr(self->conn->client_addr);
++    }
+     else if (strcmp(name, "remote_addr") == 0) {
+-        return makesockaddr(self->conn->remote_addr);
++        return makesockaddr(self->conn->client_addr);
+     }
+     else if (strcmp(name, "notes") == 0) {
+         Py_INCREF(self->notes);
