@@ -1,5 +1,5 @@
 %define		mod_name	python
-%define 	apxs		/usr/sbin/apxs
+%define		apxs		/usr/sbin/apxs
 Summary:	An embedded Python interpreter for the Apache Web server
 Summary(cs.UTF-8):	Vestavěný interpret Pythonu pro WWW server Apache
 Summary(da.UTF-8):	En indbygget Python-fortolker for webtjeneren Apache
@@ -19,7 +19,7 @@ Summary(sl.UTF-8):	Vključeni pythonski tolmač za spletni strežnik Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.3.1
-Release:	19
+Release:	20
 License:	Apache
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz

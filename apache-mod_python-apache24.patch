@@ -60,3 +60,19 @@
      }
      else if (strcmp(name, "notes") == 0) {
          Py_INCREF(self->notes);
+--- mod_python-3.3.1/src/requestobject.c~	2006-12-03 05:36:37.000000000 +0100
++++ mod_python-3.3.1/src/requestobject.c	2013-06-21 00:41:47.635302626 +0200
+@@ -1230,7 +1230,12 @@
+        follow requires, e.g. "requires role terminator".
+     */
+ 
+-    const apr_array_header_t *reqs_arr = ap_requires(self->request_rec);
++    const apr_array_header_t *reqs_arr =
++#if AP_SERVER_MAJORVERSION_NUMBER > 2 || AP_SERVER_MINORVERSION_NUMBER >= 3
++    NULL;
++#else
++    ap_requires(self->request_rec);
++#endif
+     require_line *reqs;
+     int i, ti = 0;
+ 
