@@ -18,17 +18,14 @@ Summary(sk.UTF-8):	Interpreter jazyka Perl pre webový server Apache
 Summary(sl.UTF-8):	Vključeni pythonski tolmač za spletni strežnik Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	3.3.1
-Release:	20
+Version:	3.4.1
+Release:	1
 License:	Apache
 Group:		Networking/Daemons/HTTP
-Source0:	http://www.apache.org/dist/httpd/modpython/mod_%{mod_name}-%{version}.tgz
-# Source0-md5:	a3b0150176b726bd2833dac3a7837dc5
+Source0:	http://dist.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
+# Source0-md5:	d27804354f1808ad55d432fd76ed9d05
 Source1:	%{name}.conf
 Patch0:		%{name}-httpd-not-needed.patch
-Patch1:		%{name}-ldflags.patch
-Patch2:		%{name}-apr_brigade_sentinel.patch
-Patch3:		%{name}-apache24.patch
 URL:		http://www.modpython.org/
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
@@ -127,9 +124,6 @@ prestandan jämfört med den traditionella CGI-metoden.
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 %{__aclocal}
@@ -140,7 +134,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{apachelibdir},%{apacheconfdir}}
+install -d $RPM_BUILD_ROOT{%{apachelibdir},%{apacheconfdir},%{_bindir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -161,9 +155,10 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc-html/* README COPYRIGHT NEWS CREDITS
+%doc doc-html/* README.md COPYRIGHT NEWS CREDITS
 %doc examples
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{apacheconfdir}/*_mod_%{mod_name}.conf
+%attr(755,root,root) %{_bindir}/mod_python
 %attr(755,root,root) %{apachelibdir}/*.so
 %dir %{py_sitedir}/mod_%{mod_name}
 %if "%{py_ver}" > "2.4"
