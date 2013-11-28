@@ -20,7 +20,7 @@ Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.5.0
-Release:	5
+Release:	6
 License:	Apache
 Group:		Networking/Daemons/HTTP
 Source0:	http://dist.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
@@ -47,7 +47,6 @@ BuildRequires:	python3
 BuildRequires:	python3-devel >= 3.3
 %endif
 Requires(post,preun,postun):	systemd-units >= 38
-Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 Requires:	apache(modules-api) = %apache_modules_api
 Requires:	apr >= 1:1.0.0
@@ -148,7 +147,6 @@ Summary(pl.UTF-8):	Wbudowany interpreter języka Python 3 dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python3-interpretator för webbservern Apache
 Group:		Networking/Daemons/HTTP
 Requires(post,preun,postun):	systemd-units >= 38
-Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 Requires:	apache(modules-api) = %apache_modules_api
 Requires:	apr >= 1:1.0.0
