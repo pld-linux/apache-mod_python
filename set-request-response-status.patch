@@ -1,0 +1,10 @@
+--- mod_python-3.5.0/src/requestobject.c~	2013-11-28 14:12:06.515765224 +0100
++++ mod_python-3.5.0/src/requestobject.c	2013-11-28 14:12:23.809244099 +0100
+@@ -378,6 +378,7 @@
+     }
+ 
+     self->request_rec->status_line = apr_pstrdup(self->request_rec->pool, status_line);
++    self->request_rec->status = status;
+ 
+     return PyObject_GetAttrString((PyObject*)self, "write");
+ }

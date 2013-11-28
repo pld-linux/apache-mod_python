@@ -29,6 +29,7 @@ Source1:	%{name}.conf
 Source2:	%{name}3.conf
 Patch0:		%{name}-httpd-not-needed.patch
 Patch1:		no-git.patch
+Patch2:		set-request-response-status.patch
 URL:		http://www.modpython.org/
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
@@ -229,6 +230,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 %setup -q -n mod_%{mod_name}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__aclocal}
