@@ -233,21 +233,25 @@ prestandan jämfört med den traditionella CGI-metoden.
 %build
 %{__aclocal}
 %{__autoconf}
+
 %if %{with python2}
 %configure \
 	--with-apxs=%{apxs} \
 	--with-python=%{__python}
+
+%{__make} clean
 %{__make} dso
 install -d apache-mod_python{%{apachelibdir},%{apacheconfdir},%{_bindir}}
 %{__make} install \
 	DESTDIR=`pwd`/apache-mod_python
-%{__make} clean
 %endif
 
 %if %{with python3}
 %configure \
 	--with-apxs=%{apxs} \
 	--with-python=%{__python3}
+
+%{__make} clean
 %{__make} dso
 install -d apache-mod_python3{%{apachelibdir},%{apacheconfdir},%{_bindir}}
 %{__make} install \
@@ -259,9 +263,6 @@ install -d apache-mod_python3{%{apachelibdir},%{apacheconfdir},%{_bindir}}
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{apachelibdir},%{apacheconfdir},%{_bindir}}
-
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
 
 %if %{with python2}
 cp -a apache-mod_python/* $RPM_BUILD_ROOT
