@@ -20,7 +20,7 @@ Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.5.0
-Release:	3
+Release:	4
 License:	Apache
 Group:		Networking/Daemons/HTTP
 Source0:	http://dist.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
@@ -37,7 +37,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex >= 2.5.31
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	rpmbuild(macros) >= 1.671
 %if %{with python2}
 BuildRequires:	python
 BuildRequires:	python-devel >= 2.6
@@ -46,11 +46,15 @@ BuildRequires:	python-devel >= 2.6
 BuildRequires:	python3
 BuildRequires:	python3-devel >= 3.3
 %endif
+Requires(post,preun,postun):	systemd-units >= 38
+Requires(post,preun):	sbin/chkconfig
+Requires:	rc-scripts
 Requires:	apache(modules-api) = %apache_modules_api
 Requires:	apr >= 1:1.0.0
 # apache.py uses pdb module
 Requires:	python-devel-tools
 %requires_eq	python-libs
+Requires:	systemd-units >= 38
 Conflicts:	apache-mod_python3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -143,11 +147,15 @@ Summary(ja.UTF-8):	Apache Web サーバー用の組込み Python 3 インター�
 Summary(pl.UTF-8):	Wbudowany interpreter języka Python 3 dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python3-interpretator för webbservern Apache
 Group:		Networking/Daemons/HTTP
+Requires(post,preun,postun):	systemd-units >= 38
+Requires(post,preun):	sbin/chkconfig
+Requires:	rc-scripts
 Requires:	apache(modules-api) = %apache_modules_api
 Requires:	apr >= 1:1.0.0
 # apache.py uses pdb module
 Requires:	python3-devel-tools
 %requires_eq	python3-libs
+Requires:	systemd-units >= 38
 Conflicts:	apache-mod_python
 
 %description -n apache-mod_python3
@@ -283,18 +291,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %service -q httpd restart
+%systemd_service_restart httpd.service
 
 %postun
 if [ "$1" = "0" ]; then
 	%service -q httpd restart
+	%systemd_service_restart httpd.service
 fi
 
 %post -n apache-mod_python3
 %service -q httpd restart
+%systemd_service_restart httpd.service
 
 %postun -n apache-mod_python3
 if [ "$1" = "0" ]; then
 	%service -q httpd restart
+	%systemd_service_restart httpd.service
 fi
 
 %if %{with python2}
