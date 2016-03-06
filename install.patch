@@ -1,0 +1,14 @@
+--- mod_python-3.5.0/dist/Makefile.in~	2013-11-12 04:21:34.000000000 +0100
++++ mod_python-3.5.0/dist/Makefile.in	2016-03-06 12:15:34.649626272 +0100
+@@ -34,9 +34,9 @@
+ install_py_lib: mod_python src
+ 	@cd src; $(MAKE) psp_parser.c
+ 	if test -z "$(DESTDIR)" ; then \
+-		$(PYTHON_BIN) setup.py install --optimize 2 --force ; \
++		$(PYTHON_BIN) setup.py install --optimize 2 --force --install-purelib=$(PY_SITESCRIPTDIR) --install-platlib=$(PY_SITEDIR) ; \
+ 	else \
+-		$(PYTHON_BIN) setup.py install --optimize 2 --force --root $(DESTDIR) ; \
++		$(PYTHON_BIN) setup.py install --optimize 2 --force --root $(DESTDIR) --install-purelib=$(PY_SITESCRIPTDIR) --install-platlib=$(PY_SITEDIR) ; \
+ 	fi
+ 
+ mod_python.so:

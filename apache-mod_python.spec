@@ -20,7 +20,7 @@ Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.5.0
-Release:	17
+Release:	18
 License:	Apache
 Group:		Networking/Daemons/HTTP
 Source0:	http://dist.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
@@ -30,6 +30,7 @@ Source2:	%{name}3.conf
 Patch0:		%{name}-httpd-not-needed.patch
 Patch1:		no-git.patch
 Patch2:		set-request-response-status.patch
+Patch3:		install.patch
 URL:		http://www.modpython.org/
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
@@ -237,6 +238,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__aclocal}
@@ -251,7 +253,9 @@ prestandan jämfört med den traditionella CGI-metoden.
 %{__make} dso
 install -d apache-mod_python{%{apachelibdir},%{apacheconfdir},%{_bindir}}
 %{__make} install \
-	DESTDIR=`pwd`/apache-mod_python
+	DESTDIR=`pwd`/apache-mod_python \
+	PY_SITESCRIPTDIR=%{py_sitescriptdir} \
+	PY_SITEDIR=%{py_sitedir}
 %endif
 
 %if %{with python3}
@@ -263,7 +267,9 @@ install -d apache-mod_python{%{apachelibdir},%{apacheconfdir},%{_bindir}}
 %{__make} dso
 install -d apache-mod_python3{%{apachelibdir},%{apacheconfdir},%{_bindir}}
 %{__make} install \
-	DESTDIR=`pwd`/apache-mod_python3
+	DESTDIR=`pwd`/apache-mod_python3 \
+	PY_SITESCRIPTDIR=%{py3_sitescriptdir} \
+	PY_SITEDIR=%{py3_sitedir}
 %{__mv} apache-mod_python3%{_bindir}/mod_python{,3}
 %{__mv} apache-mod_python3%{apachelibdir}/mod_python{,3}.so
 %endif
