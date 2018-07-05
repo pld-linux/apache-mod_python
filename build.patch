@@ -1,0 +1,20 @@
+--- mod_python-3.5.0/src/_apachemodule.c~	2013-11-12 04:21:34.000000000 +0100
++++ mod_python-3.5.0/src/_apachemodule.c	2018-07-05 21:05:19.623844821 +0200
+@@ -836,7 +836,7 @@ static struct PyModuleDef _apache_module
+ 
+ PyObject *_apache_module_init()
+ {
+-    PyObject *m, *d, *o;
++    PyObject *m, *d, *o, *mod;
+ 
+     PyType_Ready(&MpTable_Type);
+     PyType_Ready(&MpTableIter_Type);
+@@ -851,7 +851,7 @@ PyObject *_apache_module_init()
+ #else
+     m = PyModule_Create(&_apache_moduledef);
+     PyObject *name = PyUnicode_FromString("_apache");
+-    _PyImport_FixupExtensionObject(m, name, name);
++    _PyImport_FixupExtensionObject(m, name, name, mod);
+ #endif
+     d = PyModule_GetDict(m);
+     Mp_ServerReturn = PyErr_NewException("_apache.SERVER_RETURN", NULL, NULL);
