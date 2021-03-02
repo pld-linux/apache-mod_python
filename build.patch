@@ -1,5 +1,6 @@
---- mod_python-3.5.0/src/_apachemodule.c~	2013-11-12 04:21:34.000000000 +0100
-+++ mod_python-3.5.0/src/_apachemodule.c	2018-07-05 21:05:19.623844821 +0200
+diff -urNp -x '*.orig' mod_python-3.5.0.org/src/_apachemodule.c mod_python-3.5.0/src/_apachemodule.c
+--- mod_python-3.5.0.org/src/_apachemodule.c	2013-11-12 04:21:34.000000000 +0100
++++ mod_python-3.5.0/src/_apachemodule.c	2021-03-02 22:05:35.930030347 +0100
 @@ -836,7 +836,7 @@ static struct PyModuleDef _apache_module
  
  PyObject *_apache_module_init()
