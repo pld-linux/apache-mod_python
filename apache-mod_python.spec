@@ -20,7 +20,7 @@ Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.5.0
-Release:	64
+Release:	65
 License:	Apache v2.0
 Group:		Networking/Daemons/HTTP
 Source0:	http://dist.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
@@ -33,7 +33,7 @@ Patch2:		set-request-response-status.patch
 Patch3:		install.patch
 Patch4:		import.patch
 Patch5:		build.patch
-URL:		http://modpython.org/
+URL:		https://modpython.org/
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
 BuildRequires:	autoconf
