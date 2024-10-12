@@ -238,7 +238,9 @@ prestandan jämfört med den traditionella CGI-metoden.
 %patch0 -p1
 %patch2 -p1
 %patch3 -p1
+%ifnarch %{x8664}
 %patch4 -p1
+%endif
 
 %build
 %{__aclocal}
