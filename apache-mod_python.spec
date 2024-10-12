@@ -318,7 +318,7 @@ fi
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc doc-html/* README.md COPYRIGHT NEWS CREDITS
+%doc README.md COPYRIGHT NEWS CREDITS
 %doc examples
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{apacheconfdir}/*_mod_%{mod_name}.conf
 %attr(755,root,root) %{_bindir}/mod_python
@@ -332,7 +332,7 @@ fi
 %if %{with python3}
 %files -n apache-mod_python3
 %defattr(644,root,root,755)
-%doc doc-html/* README.md COPYRIGHT NEWS CREDITS
+%doc README.md COPYRIGHT NEWS CREDITS
 %doc examples
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{apacheconfdir}/*_mod_%{mod_name}3.conf
 %attr(755,root,root) %{_bindir}/mod_python3
