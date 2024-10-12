@@ -1,7 +1,7 @@
 diff -urNp -x '*.orig' mod_python-3.5.0.org/configure.in mod_python-3.5.0/configure.in
 --- mod_python-3.5.0.org/configure.in	2013-11-12 04:21:34.000000000 +0100
 +++ mod_python-3.5.0/configure.in	2021-03-02 22:05:35.446699820 +0100
-@@ -73,18 +73,6 @@ else
+@@ -73,18 +73,6 @@
    DSO="do_dso"
    ALL="dso"
  
@@ -13,7 +13,7 @@ diff -urNp -x '*.orig' mod_python-3.5.0.org/configure.in mod_python-3.5.0/config
 -  AC_MSG_RESULT($HTTPD_VERSION)
 -
 -  # make sure version begins with 2
--  if test -z "`echo $HTTPD_VERSION | egrep \^2`"; then
+-  if test -z "`echo $HTTPD_VERSION | grep -E \^2`"; then
 -    AC_MSG_ERROR([This version of mod_python only works with Apache 2. The one we have ($HTTPD) seems to be $HTTPD_VERSION.])
 -  fi
 -

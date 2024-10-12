@@ -19,20 +19,18 @@ Summary(ja.UTF-8):	Apache Web サーバー用の組込み Python インタープ
 Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	3.5.0
-Release:	70
+Version:	3.5.0.4
+Release:	0.1
 License:	Apache v2.0
 Group:		Networking/Daemons/HTTP
-Source0:	http://dist.modpython.org/dist/mod_%{mod_name}-%{version}.tgz
-# Source0-md5:	2e61621e8d030f535f112d8e739161e2
+Source0:	https://github.com/grisha/mod_python/archive/%{version}/mod_%{mod_name}-%{version}.tar.gz
+# Source0-md5:	c53f328b04cfb9c2a83887de18c58273
 Source1:	%{name}.conf
 Source2:	%{name}3.conf
 Patch0:		%{name}-httpd-not-needed.patch
-Patch1:		no-git.patch
 Patch2:		set-request-response-status.patch
 Patch3:		install.patch
-Patch4:		import.patch
-Patch5:		build.patch
+Patch4:		py3-nohash.patch
 URL:		https://modpython.org/
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
@@ -238,11 +236,9 @@ prestandan jämfört med den traditionella CGI-metoden.
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 %{__aclocal}

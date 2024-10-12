@@ -1,0 +1,14 @@
+--- mod_python-3.5.0.4/src/tableobject.c.orig	2024-09-05 14:03:35.000000000 +0200
++++ mod_python-3.5.0.4/src/tableobject.c	2024-10-12 23:17:10.561504401 +0200
+@@ -1158,7 +1158,11 @@
+     return result;
+ }
+ 
++#if PY_MAJOR_VERSION < 3
+ static long table_nohash(PyObject *self)
++#else
++static int table_nohash(PyObject *self)
++#endif
+ {
+     TABLE_DEBUG("table_nohash");
+ 
