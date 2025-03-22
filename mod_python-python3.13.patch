@@ -1,0 +1,19 @@
+This function has been removed in 3.13 and equivalent code reserved only for builtin modules.
+Not sure if something other shouldn't be done here...
+--- mod_python-3.5.0.4/src/_apachemodule.c.orig	2024-09-05 14:03:35.000000000 +0200
++++ mod_python-3.5.0.4/src/_apachemodule.c	2025-03-22 21:30:25.453948543 +0100
+@@ -854,12 +854,14 @@ PyObject *_apache_module_init()
+     m = PyModule_Create(&_apache_moduledef);
+     PyObject *name = PyUnicode_FromString("_apache");
+ 
++#if PY_MINOR_VERSION < 13
+     _PyImport_FixupExtensionObject(m, name, name
+ #if PY_MINOR_VERSION >= 7
+                    ,PyImport_GetModuleDict()
+ #endif
+                    );
+ #endif
++#endif
+     d = PyModule_GetDict(m);
+     Mp_ServerReturn = PyErr_NewException("_apache.SERVER_RETURN", NULL, NULL);
+     if (Mp_ServerReturn == NULL)

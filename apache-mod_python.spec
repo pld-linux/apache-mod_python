@@ -20,7 +20,7 @@ Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.5.0.4
-Release:	3
+Release:	4
 License:	Apache v2.0
 Group:		Networking/Daemons/HTTP
 Source0:	https://github.com/grisha/mod_python/archive/%{version}/mod_%{mod_name}-%{version}.tar.gz
@@ -31,6 +31,7 @@ Patch0:		%{name}-httpd-not-needed.patch
 Patch2:		set-request-response-status.patch
 Patch3:		install.patch
 Patch4:		py3-nohash.patch
+Patch5:		mod_python-python3.13.patch
 URL:		https://modpython.org/
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
@@ -241,6 +242,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 %ifnarch %{x8664}
 %patch -P 4 -p1
 %endif
+%patch -P 5 -p1
 
 %build
 %{__aclocal}
