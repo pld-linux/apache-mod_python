@@ -20,7 +20,7 @@ Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
 Version:	3.5.0.4
-Release:	6
+Release:	7
 License:	Apache v2.0
 Group:		Networking/Daemons/HTTP
 Source0:	https://github.com/grisha/mod_python/archive/%{version}/mod_%{mod_name}-%{version}.tar.gz
