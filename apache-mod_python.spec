@@ -19,19 +19,18 @@ Summary(ja.UTF-8):	Apache Web サーバー用の組込み Python インタープ
 Summary(pl.UTF-8):	Wbudowany interpreter języka Python dla serwera WWW Apache
 Summary(sv.UTF-8):	En inbyggd Python-interpretator för webbservern Apache
 Name:		apache-mod_%{mod_name}
-Version:	3.5.0.4
-Release:	15
+Version:	3.5.0.7
+Release:	1
 License:	Apache v2.0
 Group:		Networking/Daemons/HTTP
 Source0:	https://github.com/grisha/mod_python/archive/%{version}/mod_%{mod_name}-%{version}.tar.gz
-# Source0-md5:	c53f328b04cfb9c2a83887de18c58273
+# Source0-md5:	8efb0028ea63b8f926f885c573f54373
 Source1:	%{name}.conf
 Source2:	%{name}3.conf
 Patch0:		%{name}-httpd-not-needed.patch
 Patch2:		set-request-response-status.patch
 Patch3:		install.patch
-Patch4:		py3-nohash.patch
-Patch5:		mod_python-python3.13.patch
+Patch4:		py2-Py_hash_t.patch
 URL:		https://modpython.org/
 BuildRequires:	apache-devel >= 2.0.52-7
 BuildRequires:	apr-devel >= 1:1.0.0
@@ -53,7 +52,7 @@ Requires:	rc-scripts
 Requires:	apache(modules-api) = %apache_modules_api
 Requires:	apr >= 1:1.0.0
 # apache.py uses pdb module
-Requires:	python-devel-tools
+Requires:	python-modules >= 1:2.6
 %requires_eq	python-libs
 Requires:	systemd-units >= 38
 Conflicts:	apache-mod_python3
@@ -153,7 +152,7 @@ Requires:	rc-scripts
 Requires:	apache(modules-api) = %apache_modules_api
 Requires:	apr >= 1:1.0.0
 # apache.py uses pdb module
-Requires:	python3-devel-tools
+Requires:	python3-modules >= 1:3.3
 %requires_eq	python3-libs
 Requires:	systemd-units >= 38
 Conflicts:	apache-mod_python
@@ -239,10 +238,7 @@ prestandan jämfört med den traditionella CGI-metoden.
 %patch -P 0 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
-%ifnarch %{x8664}
 %patch -P 4 -p1
-%endif
-%patch -P 5 -p1
 
 %build
 %{__aclocal}

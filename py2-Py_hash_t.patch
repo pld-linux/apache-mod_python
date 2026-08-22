@@ -1,0 +1,28 @@
+Py_hash_t appeared in Python 3.2, but 3.5.0.7 started using it unconditionally
+in table_nohash(); Python 2's hashfunc slot returns long.
+--- mod_python-3.5.0.7/src/include/mod_python.h.orig	2026-08-22 12:27:55.133257104 +0200
++++ mod_python-3.5.0.7/src/include/mod_python.h	2026-08-22 12:27:55.200985332 +0200
+@@ -45,6 +45,10 @@
+ #include "Python.h"
+ #include "structmember.h"
+ 
++#if PY_VERSION_HEX < 0x03020000
++typedef long Py_hash_t;
++#endif
++
+ /* Apache headers */
+ #include "httpd.h"
+ #define CORE_PRIVATE
+--- mod_python-3.5.0.7/src/include/mod_python.h.in.orig	2026-08-22 12:27:55.212386888 +0200
++++ mod_python-3.5.0.7/src/include/mod_python.h.in	2026-08-22 12:27:55.277227409 +0200
+@@ -47,6 +47,10 @@
+ #include "Python.h"
+ #include "structmember.h"
+ 
++#if PY_VERSION_HEX < 0x03020000
++typedef long Py_hash_t;
++#endif
++
+ /* Apache headers */
+ #include "httpd.h"
+ #define CORE_PRIVATE
